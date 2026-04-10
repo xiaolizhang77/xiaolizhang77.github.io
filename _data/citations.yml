@@ -1,11 +1,11 @@
 metadata:
-  last_updated: '2026-03-20'
+  last_updated: '2026-04-10'
 papers:
   MKR62vEAAAAJ:u-x6o8ySG0sC:
-    citations: 12
+    citations: 15
     title: Privacy-preserving federated embedding learning for localized retrieval-augmented generation
     year: '2025'
   MKR62vEAAAAJ:u5HHmVD_uO8C:
-    citations: 4
+    citations: 5
     title: 'XRAG: eXamining the Core--Benchmarking Foundational Components in Advanced Retrieval-Augmented Generation'
     year: '2024'
