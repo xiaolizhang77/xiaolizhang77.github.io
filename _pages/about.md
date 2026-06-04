@@ -6,7 +6,7 @@ subtitle: <a href='#'>Zhongguancun Laboratory</a>
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: pic.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>Building 8, No. 1 Compound</p>
