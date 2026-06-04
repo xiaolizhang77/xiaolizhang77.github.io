@@ -2,17 +2,13 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Zhongguancun Laboratory</a>
+subtitle: <a href='#'>Beihang University</a> · <a href='#'>Zhongguancun Laboratory</a>
 
 profile:
   align: right
   image: pic.jpg
   image_circular: false # crops the image to make it circular
-  more_info: >
-    <p>Beihang University</p>
-    <p>Building 8, No. 1 Compound</p>
-    <p>Zhongguancun East Road, Haidian District</p>
-    <p>Beijing, China</p>
+  more_info:
 
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
