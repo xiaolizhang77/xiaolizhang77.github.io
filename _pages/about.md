@@ -9,6 +9,7 @@ profile:
   image: pic.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
+    <p>Beihang University</p>
     <p>Building 8, No. 1 Compound</p>
     <p>Zhongguancun East Road, Haidian District</p>
     <p>Beijing, China</p>
@@ -22,7 +23,7 @@ announcements:
   limit: 5 # leave blank to include all the news in the `_news` folder
 
 latest_posts:
-  enabled: true
+  enabled: false
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
 ---
