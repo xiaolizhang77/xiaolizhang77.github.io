@@ -1,12 +1,12 @@
 metadata:
-  last_updated: '2026-06-08'
+  last_updated: '2026-07-15'
 papers:
   MKR62vEAAAAJ:d1gkVwhDpl0C:
     citations: 0
     title: 'NanoNet: Parameter-Efficient Learning with Label-Scarce Supervision for Lightweight Text Mining Model'
     year: '2026'
   MKR62vEAAAAJ:u-x6o8ySG0sC:
-    citations: 16
+    citations: 18
     title: Privacy-preserving federated embedding learning for localized retrieval-augmented generation
     year: '2025'
   MKR62vEAAAAJ:u5HHmVD_uO8C:
