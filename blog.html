@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fafafc" />
+    <title>Proof-R1 中文解读 · 让强化学习学会构造可验证证明</title>
+    <meta
+      name="description"
+      content="Proof-R1 论文中文解读：以机器可检验的形式化验证定义可信证明状态，以答案支撑依赖闭包分配结果信用，让强化学习学会构造可验证的逻辑证明。"
+    />
+    <link rel="canonical" href="https://xiaolizhang77.github.io/blog.html" />
+    <link rel="icon" type="image/png" href="assets/proof-r1/logo.png" />
+    <link rel="stylesheet" href="assets/proof-r1/site.css" />
+  </head>
+  <body class="article-page">
+    <a class="skip-link" href="#article">跳至正文</a>
+    <header class="site-nav">
+      <a class="brand" href="./"><img src="assets/proof-r1/logo.png" alt="" width="32" height="32" />Proof-R1</a>
+      <a class="back-link" href="./">← 返回论文主页</a>
+    </header>
+    <main id="article" class="article-main">
+      <article>
+        <header class="article-header">
+          <p class="eyebrow">PROOF-R1 · 中文解读</p>
+          <h1>让强化学习学会<br />构造可验证证明</h1>
+          <p class="article-lead">
+            答案正确，不代表推理成立。Proof-R1 将形式化验证融入证明状态、依赖追踪与策略优化， 让模型学习一步步构造真正支撑答案的证明。
+          </p>
+          <p class="article-meta">
+            基于论文与作者提供的公众号材料整理 ·
+            <a href="https://arxiv.org/abs/2609.37203" target="_blank" rel="noopener noreferrer">阅读论文 ↗</a>
+          </p>
+        </header>
+
+        <section aria-labelledby="results-first">
+          <h2 id="results-first">01 / 答案更准，证明也更可信</h2>
+          <p>
+            Proof-R1 在 ProverQA 上训练，并在 FOLIO、ProofWriter 上检验跨数据集泛化， 覆盖 Qwen2.5-7B-Instruct、Qwen3-8B、Llama-3.1-8B 与
+            GLM-Z1-9B-0414 四个基座模型。
+          </p>
+          <p>
+            在 Qwen2.5-7B-Instruct 的 ProverQA 整体评测中，Proof-R1 的 Avg@3 达到
+            <strong>62.80%</strong>，高于最强基线的 59.57%；规则验证率从最强基线的 30.44% 提升至 <strong>41.19%</strong>。在困难子集上，Pass@3 达到
+            <strong>76.88%</strong>， 比最强基线提高 <strong>11.05 个百分点</strong>。
+          </p>
+          <figure>
+            <a href="assets/proof-r1/fig1b_proof_traces.png" target="_blank" rel="noopener noreferrer">
+              <img
+                src="assets/proof-r1/fig1b_proof_traces.png"
+                alt="正确答案与可验证证明轨迹的比较：Proof-R1 的正确答案占 96.5%，其中蓝色的可验证且正确轨迹占全部输出的 75.3%。"
+                width="1208"
+                height="1015"
+                loading="lazy"
+              />
+            </a>
+            <figcaption>图 1：整根柱表示正确答案占比，蓝色部分表示答案正确且证明轨迹通过形式化验证的占比。</figcaption>
+          </figure>
+          <p>
+            当 Qwen3-8B 的答案准确率已接近饱和时，Proof-R1 仍将形式化验证率（FVR）提高到
+            <strong>96.56%</strong>，规则验证率（RVR）提高到 <strong>94.36%</strong>， 分别比最强基线高 1.43 和 5.08 个百分点。 这里的 FVR 与 RVR
+            衡量的是符合评测条件的<strong>证明步骤</strong>的通过率； 上图则单独展示完整证明轨迹与答案的关系。
+          </p>
+        </section>
+
+        <section aria-labelledby="motivation">
+          <h2 id="motivation">02 / 为什么“答对了”还不够？</h2>
+          <p>考虑下面三个前提：</p>
+          <ol>
+            <li>Alex 是工程师，且不是经理。</li>
+            <li>每位经理都有访问权限。</li>
+            <li>每位工程师都有访问权限。</li>
+          </ol>
+          <p>
+            问题是“Alex 有访问权限吗？”从“Alex 不是经理”推出“Alex 没有权限”， 犯了否定前件的谬误。成立的推理应使用“Alex
+            是工程师”和“每位工程师都有访问权限”， 得到 Alex 有访问权限。
+          </p>
+          <figure>
+            <a href="assets/proof-r1/fig2_contrast.png" target="_blank" rel="noopener noreferrer">
+              <img
+                src="assets/proof-r1/fig2_contrast.png"
+                alt="普通推理错误地从非经理身份推出无权限；可验证推理显式声明依赖、结论和逻辑规则，从工程师身份正确推出访问权限。"
+                width="2409"
+                height="857"
+                loading="lazy"
+              />
+            </a>
+            <figcaption>图 2：可验证推理将“用了哪些前提、推出什么、应用哪条规则”明确写出。</figcaption>
+          </figure>
+          <p>
+            一个事后的验证分数可以揭示推理有误，却没有规定后续步骤能够信任哪些中间结论， 也没有区分哪些正确步骤真正支撑了答案。Proof-R1
+            围绕这两个问题重新组织训练过程。
+          </p>
+        </section>
+
+        <section aria-labelledby="verification">
+          <h2 id="verification">03 / MCFV：让验证决定可信证明状态</h2>
+          <p>
+            模型将证明拆分为结构化动作。每个动作包含<strong>依赖、结论和规则</strong>三个核心字段，
+            明确说明这一步使用了哪些原始前提或中间结论，以及声称采用的谓词逻辑规则。
+          </p>
+          <figure>
+            <a href="assets/proof-r1/fig3_framework.png" target="_blank" rel="noopener noreferrer">
+              <img
+                src="assets/proof-r1/fig3_framework.png"
+                alt="Proof-R1 总体框架：策略产生结构化证明动作，MCFV 检查动作并维护可信状态，ASDC 恢复答案支撑依赖闭包，两类信号共同指导策略优化。"
+                width="2407"
+                height="1051"
+                loading="lazy"
+              />
+            </a>
+            <figcaption>图 3：形式化验证、答案支撑依赖闭包与策略更新组成统一的证明构造框架。</figcaption>
+          </figure>
+          <p>MCFV（Machine-Checkable Formal Verification）执行几个互补的检查：</p>
+          <ul>
+            <li>
+              <strong>语义检查：</strong>用 SMT 求解器判断“依赖成立且结论不成立”是否不可满足（UNSAT）。 如果不可满足，意味着这些依赖必然推出当前结论。
+            </li>
+            <li><strong>规则检查：</strong>验证模型声明的规则、主前提、变量替换与结论是否匹配。</li>
+            <li><strong>证明进展检查：</strong>判断动作是否提供了非平凡的进展，避免重复结论、重述依赖或输出重言式。</li>
+          </ul>
+          <p>
+            框架维护语义验证状态与更严格的规则验证状态。通过相应检查的结论才能被接纳，
+            成为后续推理可引用的可信依赖。证明进展检查进一步为优化提供信号。 验证因此直接参与了证明状态的构造。
+          </p>
+        </section>
+
+        <section aria-labelledby="dependency">
+          <h2 id="dependency">04 / ASDC：只给支撑答案的动作分配结果信用</h2>
+          <p>
+            一个步骤即使逻辑正确，也可能只是与目标无关的旁支。 ASDC（Answer-Supporting Dependency Closure，答案支撑依赖闭包）将轨迹组织成证明证书图：
+            节点是原始前提与中间结论，边表示显式的依赖关系。
+          </p>
+          <p>
+            从最终结论向前回溯，ASDC 恢复所有必要的祖先节点，得到答案所依赖的证明子图。
+            结果信用只分配给这个闭包中的动作；即使最终答案正确，闭包外的无关步骤也不会因此获得结果信用。
+          </p>
+          <p>
+            随后的<strong>验证对齐优化</strong>把 MCFV 的动作验证优势与 ASDC 的闭包掩码结果优势合并， 再对齐到生成各动作的 token
+            区间。关于某一步的监督因此对应到生成该动作的模型更新。
+          </p>
+          <blockquote>验证决定哪些结论可信，依赖决定哪些动作支撑答案，优化让模型逐步学会构造这样的证明。</blockquote>
+        </section>
+
+        <section aria-labelledby="training">
+          <h2 id="training">05 / 训练中，证明质量如何发生变化？</h2>
+          <p>
+            Qwen3-8B 的训练曲线显示，答案的 Pass@3 保持高位，同时 FVR 与 RVR 持续改善。
+            随着训练推进，完全满足验证义务的动作占比增加，未通过语义、规则或进展检查的动作占比下降。
+          </p>
+          <figure>
+            <a href="assets/proof-r1/fig4a_training.png" target="_blank" rel="noopener noreferrer">
+              <img
+                src="assets/proof-r1/fig4a_training.png"
+                alt="Qwen3-8B 在 ProverQA 上的训练曲线，展示 Pass@3、形式化验证率与规则验证率随优化步数变化。"
+                width="1773"
+                height="1052"
+                loading="lazy"
+              />
+            </a>
+            <figcaption>图 4：在保持答案表现的同时，模型生成的证明步骤变得更可验证。</figcaption>
+          </figure>
+          <p>
+            梯度分析还显示，MCFV 与 ASDC 提供了互补的优化方向： “这一步在形式上成立”与“这一步对最终答案有用”并非同一个目标。
+            两者结合，使模型既生成合法的中间结论，又将它们组织为支撑答案的依赖链。
+          </p>
+        </section>
+
+        <section aria-labelledby="generalization">
+          <h2 id="generalization">06 / 面对训练时未见的规则，仍能构造证明</h2>
+          <p>
+            FOLIO 是独立于 ProverQA 生成器的人工编写逻辑推理数据集， 包含训练规则本体未覆盖的全称与存在量词推理。论文评估了七类训练时未见的规则：
+            它们没有参与 ProverQA 上的策略训练，评测时通过提示提供规则定义，模型参数保持冻结。
+          </p>
+          <p>
+            分析使用 51 个 FOLIO 问题，每题采样三条输出，共 153 条输出／模型。 所有公式、依赖、步骤编号和答案绑定保持不变，再用扩展的检查器验证，
+            并按当前步骤的规则是否属于训练本体进行分组。
+          </p>
+          <div class="table-wrap" role="region" aria-label="FOLIO 训练时未见规则的验证结果" tabindex="0">
+            <table>
+              <caption>
+                训练时未见规则上的验证率（%，Qwen3-8B）
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">方法</th>
+                  <th scope="col">FVR</th>
+                  <th scope="col">RVR</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Backbone</th>
+                  <td>63.24</td>
+                  <td>34.92</td>
+                </tr>
+                <tr>
+                  <th scope="row">SFT</th>
+                  <td>67.50</td>
+                  <td>45.71</td>
+                </tr>
+                <tr class="highlight-row">
+                  <th scope="row">Proof-R1</th>
+                  <td><strong>86.21</strong></td>
+                  <td><strong>63.08</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Proof-R1 在未见规则上的 FVR 与 RVR 分别比 Backbone 提高
+            <strong>22.97</strong> 和 <strong>28.16 个百分点</strong>。 这些结果表明，学到的证明构造能力可以迁移到训练规则本体之外的逻辑操作。
+          </p>
+        </section>
+
+        <section aria-labelledby="paper-info">
+          <h2 id="paper-info">07 / 从“会给答案”走向“会构造证明”</h2>
+          <p>
+            Proof-R1 将形式化验证引入可信证明状态的维护，并通过答案支撑依赖闭包追踪证明结构。
+            模型由此学习在显式依赖与逻辑规则的约束下，逐步建立可检查、可回溯的证明。
+            三个逻辑推理基准、四个基座模型及训练时未见规则的实验，共同检验了这一方向。
+          </p>
+          <div class="paper-reference">
+            <p>
+              <strong>论文</strong><br />Learning to Prove, Not Just to Answer: Reinforcement Learning from Formal Verification for Natural-Language
+              Logical Reasoning
+            </p>
+            <p>
+              <strong>作者</strong><br />Qili Zhang, Qianren Mao, Hanze Cai, Kaiming Zhao, Yuening He, Xihan Lei, Yashuo Luo, Hanwen Hao, Yutong Gu,
+              Likang Xiao, Zhijun Chen, Weifeng Jiang, Haoyi Zhou, Jianxin Li
+            </p>
+            <p><strong>机构</strong><br />中关村实验室 · 北京航空航天大学 · 南洋理工大学 · 香港理工大学</p>
+            <p>
+              <a href="https://arxiv.org/abs/2609.37203" target="_blank" rel="noopener noreferrer">arXiv:2609.37203 ↗</a>
+              <span aria-hidden="true"> · </span>
+              <a href="./#citation">引用格式</a>
+            </p>
+          </div>
+        </section>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <p>Proof-R1 · Learning to Prove, Not Just to Answer</p>
+      <a href="./">返回论文主页 ↑</a>
+    </footer>
+  </body>
+</html>
