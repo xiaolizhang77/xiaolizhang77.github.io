@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "build": "node scripts/build-paper-site.mjs"
+  },
   "devDependencies": {
     "@shopify/prettier-plugin-liquid": "^1.10.0",
     "prettier": "^3.8.0"

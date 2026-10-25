@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fafafc" />
+    <title>Proof-R1 — Learning to Prove, Not Just to Answer</title>
+    <meta
+      name="description"
+      content="Proof-R1 learns to construct verifiable proofs for natural-language logical reasoning through reinforcement learning from formal verification."
+    />
+    <link rel="canonical" href="https://xiaolizhang77.github.io/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Proof-R1 — Learning to Prove, Not Just to Answer" />
+    <meta property="og:description" content="Reinforcement learning from formal verification for natural-language logical reasoning." />
+    <meta property="og:url" content="https://xiaolizhang77.github.io/" />
+    <meta property="og:image" content="https://xiaolizhang77.github.io/assets/proof-r1/fig3_framework.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" href="assets/proof-r1/logo.png" />
+    <link rel="stylesheet" href="assets/proof-r1/site.css" />
+    <script src="assets/proof-r1/site.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#overview">Skip to content</a>
+    <header class="site-nav">
+      <a class="brand" href="#" aria-label="Proof-R1 home"><img src="assets/proof-r1/logo.png" alt="" width="32" height="32" />Proof-R1</a>
+      <nav aria-label="Main navigation">
+        <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#citation">BibTeX</a>
+      </nav>
+      <a class="language-link" href="blog.html" lang="zh-CN">中文解读 <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="paper-title">
+        <div class="hero-brand">
+          <img src="assets/proof-r1/logo.png" alt="Proof-R1 logo: a proof tree ending in a verification checkmark" width="72" height="72" /><span
+            >Proof-R1</span
+          >
+        </div>
+        <p class="eyebrow">Reinforcement learning · Formal verification</p>
+        <h1 id="paper-title">Learning to Prove,<br /><span>Not Just to Answer.</span></h1>
+        <p class="paper-subtitle">
+          Reinforcement Learning from Formal Verification<br class="desktop-break" />
+          for Natural-Language Logical Reasoning
+        </p>
+        <div class="authors" aria-label="Paper authors">
+          <span>Qili Zhang<sup>1,2</sup></span
+          ><span>Qianren Mao<sup>1</sup></span
+          ><span>Hanze Cai<sup>2</sup></span
+          ><span>Kaiming Zhao<sup>2</sup></span
+          ><span>Yuening He<sup>2</sup></span
+          ><span>Xihan Lei<sup>2</sup></span
+          ><span>Yashuo Luo<sup>2</sup></span
+          ><span>Hanwen Hao<sup>2</sup></span
+          ><span>Yutong Gu<sup>3</sup></span
+          ><span>Likang Xiao<sup>2</sup></span
+          ><span>Zhijun Chen<sup>4</sup></span
+          ><span>Weifeng Jiang<sup>3</sup></span
+          ><span>Haoyi Zhou<sup>2</sup></span
+          ><span>Jianxin Li<sup>2</sup></span>
+        </div>
+        <div class="affiliations">
+          <span><sup>1</sup>Zhongguancun Laboratory</span><span><sup>2</sup>Beihang University</span
+          ><span><sup>3</sup>Nanyang Technological University</span><span><sup>4</sup>Hong Kong Polytechnic University</span>
+        </div>
+        <div class="resource-links">
+          <a class="button primary" href="assets/proof-r1/proof-r1.pdf" target="_blank" rel="noopener"
+            ><svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h5" /></svg
+            >Read the paper</a
+          >
+          <a class="button" href="https://anonymous.4open.science/r/Proof-R1/" target="_blank" rel="noopener"
+            ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-14-2 18" /></svg>Code</a
+          >
+          <a class="button" href="https://arxiv.org/abs/2609.37203" target="_blank" rel="noopener"
+            ><span class="arxiv-icon" aria-hidden="true">χ</span>arXiv</a
+          >
+          <a class="button" href="blog.html"
+            ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM8 8h8M8 12h8M8 16h5" /></svg><span lang="zh-CN">中文解读</span></a
+          >
+        </div>
+        <p class="hero-takeaway">A correct answer is only the beginning.<br /><strong>Learn the proof that makes it trustworthy.</strong></p>
+      </section>
+
+      <section class="overview section-tint" id="overview" aria-labelledby="overview-title">
+        <div class="content">
+          <p class="eyebrow">01 / The idea</p>
+          <h2 id="overview-title">Make every inference accountable.</h2>
+          <p class="section-lead">
+            Proof-R1 turns formal verification into part of proof construction: it determines which conclusions enter the verified state and which
+            steps receive credit for the answer.
+          </p>
+          <div class="abstract">
+            <h3>Abstract</h3>
+            <p>
+              Large language models (LLMs) are increasingly deployed for natural-language logical reasoning, where the final answer is easy to check
+              but the proof behind it is not. An intermediate conclusion should follow from its premises, and the resulting derivation should support
+              the final answer. Existing methods lack machine-checkable verification of intermediate conclusions and answer-supporting proof
+              dependencies, so they may assign credit to invalid or answer-irrelevant steps.
+            </p>
+            <p>
+              We propose <strong>Proof-R1</strong>, an RL framework from formal verification that trains LLMs to construct verifiable proofs for
+              natural-language logical reasoning. A generated conclusion enters the verified proof state only when its reasoning action satisfies
+              proof obligations through UNSAT-based formal verification. Proof-R1 recovers the answer-supporting dependency closure to align outcome
+              credit with the proof dependencies. Experiments across
+              <strong>three logical reasoning benchmarks and four backbone models</strong> demonstrate improved answer accuracy and reasoning-process
+              verifiability.
+            </p>
+          </div>
+          <div class="highlights" aria-label="Selected experimental results">
+            <div>
+              <strong>94.36<span>%</span></strong>
+              <h3>Rule verification rate</h3>
+              <p>Qwen3-8B · ProverQA<br />+5.08 points over PRoSFI</p>
+            </div>
+            <div>
+              <strong>96.56<span>%</span></strong>
+              <h3>Formal verification rate</h3>
+              <p>Qwen3-8B · ProverQA<br />+1.43 points over PRoSFI</p>
+            </div>
+            <div>
+              <strong>+11.05<span>pp</span></strong>
+              <h3>Hard-problem Pass@3</h3>
+              <p>Qwen2.5-7B · ProverQA Hard<br />76.88% vs. 65.83% (LogicAgent)</p>
+            </div>
+          </div>
+          <p class="metric-note">
+            FVR and RVR measure eligible proof steps; Pass@3 measures problems answered correctly in at least one of three samples.
+          </p>
+        </div>
+      </section>
+
+      <section class="content section" id="method" aria-labelledby="method-title">
+        <p class="eyebrow">02 / The framework</p>
+        <h2 id="method-title">From generated text to verified proof.</h2>
+        <p class="section-lead">Construct a proof state, trace the answer’s dependencies, and train on the actions that matter.</p>
+        <figure class="wide-figure">
+          <a
+            class="figure-link"
+            href="assets/proof-r1/fig3_framework.png"
+            data-zoom
+            data-caption="The Proof-R1 framework: structured actions, formal verification, answer-supporting dependencies, and verification-aligned optimization."
+            ><img
+              src="assets/proof-r1/fig3_framework.png"
+              alt="Proof-R1 framework connecting structured reasoning actions to machine-checkable formal verification, answer-supporting dependency closure, and policy optimization"
+              width="2407"
+              height="1051"
+              loading="lazy"
+          /></a>
+          <figcaption>
+            <span>Framework</span> Figure 3 in the paper. Verification governs the proof state; answer-supporting dependencies govern outcome credit.
+            <span class="zoom-hint">Click any figure to expand ↗</span>
+          </figcaption>
+        </figure>
+        <div class="method-steps">
+          <article>
+            <span class="step-number">01</span>
+            <h3>Verify each action</h3>
+            <p class="method-acronym">MCFV</p>
+            <p>
+              Each action declares its dependencies, conclusion, and inference rule. An UNSAT check verifies semantic entailment; rule checks
+              establish whether the declared inference is valid.
+            </p>
+            <code>dependencies ∧ ¬conclusion → UNSAT</code>
+          </article>
+          <article>
+            <span class="step-number">02</span>
+            <h3>Trace the answer</h3>
+            <p class="method-acronym">ASDC</p>
+            <p>
+              Traverse backward from the final conclusion to recover its answer-supporting dependency closure. Valid but irrelevant branches receive
+              no outcome credit.
+            </p>
+            <code>answer → supporting proof subgraph</code>
+          </article>
+          <article>
+            <span class="step-number">03</span>
+            <h3>Align the learning signal</h3>
+            <p class="method-acronym">Verification-aligned optimization</p>
+            <p>
+              Combine verification advantages with closure-masked outcome advantages. Align action-level credit to the tokens that generated that
+              action, then optimize the policy.
+            </p>
+            <code>action credit → aligned token spans</code>
+          </article>
+        </div>
+        <div class="motivation">
+          <div>
+            <p class="eyebrow">Why the proof matters</p>
+            <h3>“Not a manager” does not mean “no access.”</h3>
+            <p>
+              Alex is an engineer and not a manager. All engineers have access. A valid proof derives access from the engineer premise, with explicit
+              dependencies and a justified rule.
+            </p>
+            <p>Proof-R1 makes that distinction checkable at the level of individual reasoning actions.</p>
+          </div>
+          <figure>
+            <a
+              class="figure-link"
+              href="assets/proof-r1/fig2_contrast.png"
+              data-zoom
+              data-caption="An example from the paper contrasts an invalid inference with a structured, formally verifiable proof."
+              ><img
+                src="assets/proof-r1/fig2_contrast.png"
+                alt="Contrasting an invalid denial-of-the-antecedent inference with a valid proof that Alex has access because Alex is an engineer"
+                width="2409"
+                height="857"
+                loading="lazy"
+            /></a>
+            <figcaption>An illustrative example from the paper.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section section-tint" id="results" aria-labelledby="results-title">
+        <div class="content">
+          <p class="eyebrow">03 / The evidence</p>
+          <h2 id="results-title">Better answers. More verifiable reasoning.</h2>
+          <p class="section-lead">Trained on ProverQA. Evaluated on ProverQA, FOLIO, and ProofWriter with four backbone models.</p>
+          <div class="chart-pair">
+            <figure>
+              <a
+                class="figure-link"
+                href="assets/proof-r1/fig1a_accuracy_rvr.png"
+                data-zoom
+                data-caption="Answer accuracy and rule verification rate for Qwen3-8B on ProverQA (Overall), comparing five methods."
+                ><img
+                  src="assets/proof-r1/fig1a_accuracy_rvr.png"
+                  alt="Qwen3-8B on ProverQA Overall: answer accuracy versus rule verification rate for Backbone, SFT, GoV, GRPO, and Proof-R1"
+                  width="1188"
+                  height="1015"
+                  loading="lazy"
+              /></a>
+              <figcaption>
+                <strong>Accuracy and verifiability.</strong> Qwen3-8B on ProverQA Overall. Proof-R1 improves the reasoning process alongside answer
+                performance.
+              </figcaption>
+            </figure>
+            <figure>
+              <a
+                class="figure-link"
+                href="assets/proof-r1/fig1b_proof_traces.png"
+                data-zoom
+                data-caption="Correct-answer rates, split by whether the proof trace passes formal verification."
+                ><img
+                  src="assets/proof-r1/fig1b_proof_traces.png"
+                  alt="Bar chart splitting correct answers into formally verified and unverified proof traces; Proof-R1 has the largest verified portion"
+                  width="1208"
+                  height="1015"
+                  loading="lazy"
+              /></a>
+              <figcaption>
+                <strong>Correct answers with valid proofs.</strong> Qwen3-8B on ProverQA Overall. Blue segments show outputs whose answers are correct
+                and whose proof traces pass formal verification.
+              </figcaption>
+            </figure>
+          </div>
+          <div class="table-heading">
+            <div>
+              <h3>Main results on ProverQA</h3>
+              <p>Overall split · Table 1 in the paper</p>
+            </div>
+            <div class="model-tabs" role="tablist" aria-label="Backbone model" hidden>
+              <button type="button" id="tab-qwen25" role="tab" aria-selected="true" aria-controls="table-qwen25" data-model="qwen25">
+                Qwen2.5-7B</button
+              ><button type="button" id="tab-qwen3" role="tab" aria-selected="false" aria-controls="table-qwen3" tabindex="-1" data-model="qwen3">
+                Qwen3-8B
+              </button>
+            </div>
+          </div>
+          <div id="table-qwen25" class="table-panel" role="tabpanel" aria-labelledby="tab-qwen25" tabindex="0">
+            <div class="table-scroll">
+              <table>
+                <caption>
+                  Qwen2.5-7B-Instruct · All rates in %; higher is better.
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Method</th>
+                    <th scope="col">Avg@3 ↑</th>
+                    <th scope="col">Pass@3 ↑</th>
+                    <th scope="col">FVR ↑</th>
+                    <th scope="col">RVR ↑</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Backbone</th>
+                    <td>44.79</td>
+                    <td>68.43</td>
+                    <td>67.64</td>
+                    <td>18.91</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">LogicAgent</th>
+                    <td>59.28</td>
+                    <td>81.20</td>
+                    <td>54.39</td>
+                    <td>30.44</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">GoV</th>
+                    <td>47.23</td>
+                    <td>70.63</td>
+                    <td>65.28</td>
+                    <td>23.38</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">SFT</th>
+                    <td>47.04</td>
+                    <td>70.78</td>
+                    <td>66.39</td>
+                    <td>19.94</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">GRPO</th>
+                    <td>47.28</td>
+                    <td>76.36</td>
+                    <td>68.09</td>
+                    <td>12.50</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">PRoSFI</th>
+                    <td>59.57</td>
+                    <td>84.21</td>
+                    <td>62.59</td>
+                    <td>15.22</td>
+                  </tr>
+                  <tr class="ours">
+                    <th scope="row">Proof-R1 <span>Ours</span></th>
+                    <td><strong>62.80</strong></td>
+                    <td><strong>87.08</strong></td>
+                    <td><strong>70.17</strong></td>
+                    <td><strong>41.19</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div id="table-qwen3" class="table-panel" role="tabpanel" aria-labelledby="tab-qwen3" tabindex="0">
+            <div class="table-scroll">
+              <table>
+                <caption>
+                  Qwen3-8B · All rates in %; higher is better.
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Method</th>
+                    <th scope="col">Avg@3 ↑</th>
+                    <th scope="col">Pass@3 ↑</th>
+                    <th scope="col">FVR ↑</th>
+                    <th scope="col">RVR ↑</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Backbone</th>
+                    <td>95.25</td>
+                    <td>98.83</td>
+                    <td>81.82</td>
+                    <td>61.68</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">LogicAgent</th>
+                    <td><strong>96.87</strong></td>
+                    <td>99.12</td>
+                    <td>93.88</td>
+                    <td>79.70</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">GoV</th>
+                    <td>96.43</td>
+                    <td>98.53</td>
+                    <td>89.05</td>
+                    <td>70.63</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">SFT</th>
+                    <td>94.71</td>
+                    <td>99.12</td>
+                    <td>83.00</td>
+                    <td>63.94</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">GRPO</th>
+                    <td>96.08</td>
+                    <td><strong>99.27</strong></td>
+                    <td>94.22</td>
+                    <td>82.23</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">PRoSFI</th>
+                    <td>96.23</td>
+                    <td>98.83</td>
+                    <td>95.13</td>
+                    <td>89.28</td>
+                  </tr>
+                  <tr class="ours">
+                    <th scope="row">Proof-R1 <span>Ours</span></th>
+                    <td>96.52</td>
+                    <td><strong>99.27</strong></td>
+                    <td><strong>96.56</strong></td>
+                    <td><strong>94.36</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p class="metric-note">
+            <strong>Avg@3:</strong> average correctness across three samples. <strong>Pass@3:</strong> at least one correct answer in three samples.
+            <strong>FVR / RVR:</strong> semantic / declared-rule verification pass rates over eligible proof steps. Bold marks the best value in each
+            column.
+          </p>
+          <div class="transfer">
+            <div>
+              <p class="eyebrow">Beyond the training dataset</p>
+              <h3>Proof construction that transfers.</h3>
+              <p>
+                On Qwen3-8B, Proof-R1 improves both answer accuracy and proof-step verification on FOLIO and ProofWriter, without training on either
+                dataset.
+              </p>
+              <a class="text-link" href="assets/proof-r1/proof-r1.pdf#page=8" target="_blank" rel="noopener"
+                >Explore the full experiments <span aria-hidden="true">↗</span></a
+              >
+            </div>
+            <div class="table-scroll">
+              <table class="transfer-table">
+                <caption>
+                  Cross-dataset evaluation · Qwen3-8B · Table 4
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Dataset / Method</th>
+                    <th scope="col">Avg@3 ↑</th>
+                    <th scope="col">RVR ↑</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">FOLIO · Backbone</th>
+                    <td>88.89</td>
+                    <td>38.87</td>
+                  </tr>
+                  <tr class="ours">
+                    <th scope="row">FOLIO · Proof-R1</th>
+                    <td><strong>90.85</strong></td>
+                    <td><strong>59.70</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">ProofWriter · Backbone</th>
+                    <td>80.89</td>
+                    <td>51.78</td>
+                  </tr>
+                  <tr class="ours">
+                    <th scope="row">ProofWriter · Proof-R1</th>
+                    <td><strong>94.89</strong></td>
+                    <td><strong>85.46</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content section citation" id="citation" aria-labelledby="citation-title">
+        <p class="eyebrow">04 / Cite this work</p>
+        <div class="citation-heading">
+          <div>
+            <h2 id="citation-title">Build on Proof-R1.</h2>
+            <p>If you find this work useful, please consider citing our paper.</p>
+          </div>
+          <button class="button copy-button" type="button" id="copy-citation" hidden>Copy BibTeX <span aria-hidden="true">⧉</span></button>
+        </div>
+        <pre><code id="bibtex">@misc{zhang2026learningprove,
+  title={Learning to Prove, Not Just to Answer: Reinforcement Learning from Formal Verification for Natural-Language Logical Reasoning},
+  author={Qili Zhang and Qianren Mao and Hanze Cai and Kaiming Zhao and Yuening He and Xihan Lei and Yashuo Luo and Hanwen Hao and Yutong Gu and Likang Xiao and Zhijun Chen and Weifeng Jiang and Haoyi Zhou and Jianxin Li},
+  year={2026},
+  eprint={2609.37203},
+  archivePrefix={arXiv},
+  primaryClass={cs.AI},
+  url={https://arxiv.org/abs/2609.37203}
+}</code></pre>
+        <div class="citation-bottom">
+          <a class="text-link" href="assets/proof-r1/citation.bib" download>Download .bib <span aria-hidden="true">↓</span></a
+          ><span id="copy-status" role="status" aria-live="polite"></span>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <a class="brand" href="#"><img src="assets/proof-r1/logo.png" alt="" width="28" height="28" />Proof-R1</a>
+      <p>Learning to prove. Learning to reason.</p>
+      <a href="https://arxiv.org/abs/2609.37203">arXiv:2609.37203 <span aria-hidden="true">↗</span></a>
+    </footer>
+    <dialog id="figure-dialog" aria-labelledby="figure-caption">
+      <button class="dialog-close" type="button" aria-label="Close figure">×</button><img id="figure-full" alt="" />
+      <p id="figure-caption"></p>
+    </dialog>
+  </body>
+</html>

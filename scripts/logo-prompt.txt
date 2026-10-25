@@ -1,0 +1,13 @@
+Use case: logo-brand.
+Asset type: transparent square academic research project logo for the Proof-R1 website.
+Primary request: Create one distinctive polished logo mark for Proof-R1, a research paper on reinforcement learning from formal verification for natural-language logical reasoning. Its central ideas are verified proof states, logical dependency closure, and machine-checkable proof construction.
+Subject: an elegant compact geometric proof tree or branching dependency graph that naturally resolves into a subtle checkmark. Make the connected proof structure and successful verification feel like one intentional visual mark.
+Style: refined flat vector-like logo design, restrained academic identity, clean smooth geometry, crisp edges, professional and memorable at small sizes.
+Color palette: deep navy with a restrained muted blue-violet accent, appropriate on a white research project page.
+Composition: one centered icon on a square canvas, icon occupies about 80 percent of the square, balanced negative space and no excessive blank margins.
+Background: genuinely transparent, preserve alpha.
+Text: none; no letters, wordmark, labels, or numbers.
+Avoid: mascot, generic AI brain, robots, shields, sparkles, circuit-board clutter, 3D rendering, textures, drop shadows, decorative frame, watermark, mockup, multiple variants.
+
+Generated using the built-in image_gen tool with transparent_background: true.
+Output: assets/proof-r1/logo.png
