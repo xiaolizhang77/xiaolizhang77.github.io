@@ -21,7 +21,7 @@ body {
   color: var(--ink);
   background: var(--white);
   font-family: "DM Sans", "Segoe UI", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
@@ -97,7 +97,7 @@ button {
 .site-nav nav {
   display: flex;
   gap: 31px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--muted);
 }
@@ -106,7 +106,7 @@ button {
   color: var(--accent);
 }
 .language-link {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
   white-space: nowrap;
 }
@@ -137,7 +137,7 @@ button {
 .eyebrow {
   margin: 0 0 14px;
   color: var(--accent);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 1.7px;
   text-transform: uppercase;
@@ -172,7 +172,7 @@ h1 span {
   row-gap: 2px;
   max-width: 900px;
   margin: auto;
-  font-size: 15px;
+  font-size: 16px;
   color: #394f79;
   line-height: 1.9;
 }
@@ -180,7 +180,7 @@ h1 span {
   white-space: nowrap;
 }
 sup {
-  font-size: 9px;
+  font-size: 10px;
   margin-left: 2px;
   font-weight: 500;
 }
@@ -193,7 +193,7 @@ sup {
   column-gap: 18px;
   row-gap: 2px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
 }
 .affiliations sup {
   margin-right: 4px;
@@ -215,7 +215,7 @@ sup {
   border-radius: 7px;
   background: white;
   color: #303a4b;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 1.5;
   transition:
@@ -252,7 +252,7 @@ sup {
 }
 .hero-takeaway {
   color: var(--muted);
-  font-size: 15px;
+  font-size: 18px;
   line-height: 1.65;
   margin: 34px 0 0;
 }
@@ -284,7 +284,7 @@ h2 {
 .section-lead {
   color: var(--muted);
   max-width: 780px;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.65;
   margin: 0 0 34px;
 }
@@ -303,13 +303,13 @@ p {
   max-width: 990px;
 }
 .abstract h3 {
-  font-size: 14px;
+  font-size: 18px;
   margin-bottom: 14px;
   letter-spacing: 0;
 }
 .abstract p {
   color: #505969;
-  font-size: 15px;
+  font-size: 18px;
   line-height: 1.85;
 }
 .abstract p:last-child {
@@ -352,19 +352,19 @@ p {
   margin-left: 3px;
 }
 .highlights h3 {
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 7px;
   letter-spacing: 0;
 }
 .highlights p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.7;
   margin: 0;
 }
 .metric-note {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.8;
   margin: 22px 0 0;
 }
@@ -389,7 +389,7 @@ figure {
 }
 figcaption {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.75;
   margin-top: 14px;
 }
@@ -411,28 +411,28 @@ figcaption > span:first-child {
 .step-number {
   display: block;
   color: #9b99b7;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 1px;
   margin-bottom: 16px;
 }
 .method-steps h3 {
-  font-size: 18px;
+  font-size: 20px;
   margin: 0 0 8px;
 }
 .method-acronym {
   color: var(--accent) !important;
-  font-size: 11px !important;
+  font-size: 14px !important;
   font-weight: 700;
   letter-spacing: 0.2px;
 }
 .method-steps p {
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.8;
   color: var(--muted);
 }
 .method-steps code {
   display: block;
-  font-size: 10px;
+  font-size: 13px;
   color: #625b87;
   padding-top: 15px;
   border-top: 1px solid var(--line);
@@ -453,7 +453,7 @@ figcaption > span:first-child {
 }
 .motivation p:not(.eyebrow) {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 18px;
 }
 .motivation .figure-link {
   padding: 12px;
@@ -490,7 +490,7 @@ figcaption strong {
 }
 .table-heading p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   margin: 0;
 }
 .model-tabs {
@@ -507,7 +507,7 @@ figcaption strong {
   border: none;
   border-radius: 5px;
   padding: 8px 14px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
 }
 .model-tabs button[aria-selected="true"] {
@@ -516,6 +516,7 @@ figcaption strong {
   box-shadow: 0 1px 4px #20205012;
 }
 .table-scroll {
+  min-width: 0;
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: 9px;
@@ -524,7 +525,7 @@ figcaption strong {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: 16px;
   font-variant-numeric: tabular-nums;
 }
 caption {
@@ -532,7 +533,7 @@ caption {
   padding: 13px 22px;
   color: var(--muted);
   background: #fcfcfe;
-  font-size: 11px;
+  font-size: 14px;
 }
 th,
 td {
@@ -545,7 +546,7 @@ th:first-child {
 }
 thead th {
   color: #697184;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   background: #fafafd;
 }
@@ -562,7 +563,7 @@ tbody tr.ours > * {
 .ours th span {
   background: #e0def5;
   border-radius: 3px;
-  font-size: 9px;
+  font-size: 11px;
   padding: 3px 6px;
   margin-left: 6px;
   font-weight: 500;
@@ -578,7 +579,7 @@ table strong {
 }
 .transfer {
   display: grid;
-  grid-template-columns: 0.9fr 1.2fr;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
   gap: 55px;
   margin-top: 60px;
   padding-top: 40px;
@@ -587,18 +588,18 @@ table strong {
 }
 .transfer p:not(.eyebrow) {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 18px;
 }
 .text-link {
   color: var(--accent);
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 600;
 }
 .text-link span {
   margin-left: 5px;
 }
 .transfer-table {
-  font-size: 12px;
+  font-size: 16px;
 }
 .transfer-table th,
 .transfer-table td {
@@ -607,7 +608,7 @@ table strong {
 }
 .transfer-table caption {
   padding: 12px 16px;
-  font-size: 10px;
+  font-size: 14px;
 }
 .citation-heading {
   display: flex;
@@ -620,7 +621,7 @@ table strong {
 }
 .citation-heading p {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 18px;
 }
 .copy-button {
   white-space: nowrap;
@@ -632,7 +633,7 @@ table strong {
   border: 1px solid var(--line);
   border-radius: 9px;
   font:
-    12px/1.85 Consolas,
+    14px/1.85 Consolas,
     "SFMono-Regular",
     monospace;
   color: #4e5269;
@@ -644,7 +645,7 @@ table strong {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--accent);
   min-height: 26px;
 }
@@ -664,11 +665,11 @@ table strong {
   font-size: 16px;
 }
 .site-footer p {
-  font-size: 12px;
+  font-size: 14px;
   margin: 0;
 }
 .site-footer > a:last-child {
-  font-size: 11px;
+  font-size: 13px;
 }
 dialog {
   width: min(1400px, 95vw);
@@ -692,7 +693,7 @@ dialog p {
   margin: 18px 0 0;
   color: var(--muted);
   text-align: center;
-  font-size: 13px;
+  font-size: 14px;
 }
 .dialog-close {
   position: absolute;
@@ -722,7 +723,7 @@ body:has(dialog[open]) {
 .article-main .article-intro,
 .article-main .article-lead {
   color: var(--muted);
-  font-size: 18px;
+  font-size: 20px;
 }
 .article-main .table-wrap {
   overflow-x: auto;
@@ -744,7 +745,7 @@ body:has(dialog[open]) {
   margin-bottom: 0;
 }
 .back-link {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
 }
 .article-main h2 {
@@ -792,7 +793,7 @@ body:has(dialog[open]) {
 }
 .article-main .article-meta {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
 }
 .article-main .article-links {
   display: flex;
@@ -836,7 +837,7 @@ body:has(dialog[open]) {
     font-size: 19px;
   }
   .authors {
-    font-size: 13px;
+    font-size: 15px;
     column-gap: 12px;
   }
   .affiliations {
@@ -851,13 +852,14 @@ body:has(dialog[open]) {
     padding-bottom: 65px;
   }
   .method-steps {
-    gap: 24px;
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
   .method-steps h3 {
-    font-size: 16px;
+    font-size: 22px;
   }
   .method-steps code {
-    font-size: 9px;
+    font-size: 13px;
   }
   .motivation {
     grid-template-columns: 1fr;
@@ -873,10 +875,10 @@ body:has(dialog[open]) {
     font-size: 35px;
   }
   .highlights h3 {
-    font-size: 12px;
+    font-size: 16px;
   }
   .highlights p {
-    font-size: 10px;
+    font-size: 14px;
   }
   .chart-pair {
     gap: 18px;
@@ -896,6 +898,9 @@ body:has(dialog[open]) {
   }
 }
 @media (max-width: 600px) {
+  body {
+    font-size: 16px;
+  }
   .site-nav {
     height: 61px;
     padding: 0 20px;
@@ -923,7 +928,7 @@ body:has(dialog[open]) {
     height: 56px;
   }
   .eyebrow {
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 1.2px;
   }
   h1 {
@@ -932,7 +937,7 @@ body:has(dialog[open]) {
     margin: 18px 0;
   }
   .paper-subtitle {
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 23px;
     line-height: 1.6;
   }
@@ -940,15 +945,15 @@ body:has(dialog[open]) {
     display: none;
   }
   .authors {
-    font-size: 12px;
+    font-size: 14px;
     column-gap: 11px;
     row-gap: 3px;
   }
   .authors sup {
-    font-size: 8px;
+    font-size: 9px;
   }
   .affiliations {
-    font-size: 10px;
+    font-size: 12px;
     gap: 4px 12px;
     margin: 16px 0 22px;
   }
@@ -957,11 +962,11 @@ body:has(dialog[open]) {
   }
   .button {
     padding: 9px 13px;
-    font-size: 12px;
+    font-size: 14px;
     min-height: 42px;
   }
   .hero-takeaway {
-    font-size: 13px;
+    font-size: 16px;
     margin-top: 26px;
   }
   .content {
@@ -978,15 +983,18 @@ body:has(dialog[open]) {
     line-height: 1.25;
   }
   .section-lead {
-    font-size: 15px;
+    font-size: 18px;
     margin-bottom: 25px;
   }
   .abstract {
     margin: 28px 0;
     padding-left: 18px;
   }
-  .abstract p {
-    font-size: 13px;
+  .abstract p,
+  .motivation p:not(.eyebrow),
+  .transfer p:not(.eyebrow),
+  .citation-heading p {
+    font-size: 16px;
   }
   .highlights {
     grid-template-columns: 1fr;
@@ -998,23 +1006,19 @@ body:has(dialog[open]) {
     border-right: 0;
     border-bottom: 1px solid var(--line);
     padding: 20px 0;
-    display: grid;
-    grid-template-columns: 43% 57%;
-    align-items: center;
-    column-gap: 0;
+    display: block;
   }
   .highlights strong {
-    grid-row: span 2;
-    font-size: clamp(27px, 8.2vw, 34px);
-    margin: 0;
+    font-size: 36px;
+    margin: 0 0 10px;
     letter-spacing: -1.5px;
   }
   .highlights h3 {
-    font-size: 12px;
+    font-size: 16px;
     margin: 0 0 4px;
   }
   .highlights p {
-    font-size: 10px;
+    font-size: 14px;
   }
   .highlights strong span {
     font-size: 16px;
@@ -1023,7 +1027,7 @@ body:has(dialog[open]) {
     border-bottom: 0;
   }
   .metric-note {
-    font-size: 10px;
+    font-size: 13px;
     margin-top: 13px;
   }
   .figure-link {
@@ -1034,7 +1038,7 @@ body:has(dialog[open]) {
     margin: 25px 0 30px;
   }
   figcaption {
-    font-size: 11px;
+    font-size: 13px;
   }
   .zoom-hint {
     display: block;
@@ -1051,11 +1055,11 @@ body:has(dialog[open]) {
     font-size: 20px;
   }
   .method-steps p {
-    font-size: 13px;
+    font-size: 16px;
     margin-bottom: 13px;
   }
   .method-steps code {
-    font-size: 11px;
+    font-size: 13px;
     padding-top: 12px;
   }
   .motivation {
@@ -1091,15 +1095,15 @@ body:has(dialog[open]) {
   th,
   td {
     padding: 12px 13px;
-    font-size: 12px;
+    font-size: 14px;
     white-space: nowrap;
   }
   thead th {
-    font-size: 10px;
+    font-size: 13px;
   }
   caption {
     padding: 12px 13px;
-    font-size: 10px;
+    font-size: 13px;
   }
   .ours th span {
     display: none;
@@ -1111,7 +1115,7 @@ body:has(dialog[open]) {
   }
   .transfer-table th,
   .transfer-table td {
-    font-size: 11px;
+    font-size: 14px;
     padding: 12px;
   }
   .citation-heading {
@@ -1122,7 +1126,7 @@ body:has(dialog[open]) {
   }
   .citation pre {
     padding: 20px;
-    font-size: 11px;
+    font-size: 13px;
     line-height: 1.8;
   }
   .citation-bottom {
@@ -1139,14 +1143,14 @@ body:has(dialog[open]) {
     display: none;
   }
   .site-footer > a:last-child {
-    font-size: 10px;
+    font-size: 12px;
   }
   dialog {
     padding: 48px 10px 15px;
     width: 98vw;
   }
   dialog p {
-    font-size: 11px;
+    font-size: 13px;
   }
   .article-main {
     margin-top: 38px;
@@ -1160,7 +1164,7 @@ body:has(dialog[open]) {
   }
   .article-main p,
   .article-main li {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

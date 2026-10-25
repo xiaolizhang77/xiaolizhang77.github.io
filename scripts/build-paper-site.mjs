@@ -6,8 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = realpathSync(resolve(dirname(fileURLToPath(import.meta.url)), ".."));
 const destination = resolve(root, "_site");
 const requiredPages = ["index.html", "404.html", "robots.txt", "sitemap.xml"];
-const optionalPages = ["blog.html"];
-const assetDirectory = "assets/proof-r1";
+const projectDirectory = "Proof-R1";
 const files = [];
 
 function assertInsideRoot(path) {
@@ -31,11 +30,9 @@ function collect(path) {
 }
 
 for (const page of requiredPages) collect(resolve(root, page));
-for (const page of optionalPages) {
-  if (existsSync(resolve(root, page))) collect(resolve(root, page));
-}
-collect(resolve(root, assetDirectory));
-if (!files.some((file) => file.startsWith(`${assetDirectory}/`))) throw new Error("No paper assets were found.");
+collect(resolve(root, projectDirectory));
+if (!files.includes(`${projectDirectory}/index.html`)) throw new Error("The Proof-R1 homepage is missing.");
+if (!files.some((file) => file.startsWith(`${projectDirectory}/assets/`))) throw new Error("No paper assets were found.");
 
 const publishFiles = new Set(files);
 const htmlIds = new Map();
@@ -50,7 +47,6 @@ function checkReference(from, reference) {
   const base = new URL(from, "https://paper.local/");
   const url = new URL(reference.replaceAll("&amp;", "&"), base);
   let target = decodeURIComponent(url.pathname).replace(/^\//, "");
-  if (target === "Proof-R1" || target === "Proof-R1/") return;
   if (!target || target.endsWith("/")) target += "index.html";
   if (!publishFiles.has(target)) throw new Error(`Unpublished local link in ${from}: ${reference}`);
   if (url.hash && htmlIds.has(target) && !htmlIds.get(target).has(decodeURIComponent(url.hash.slice(1)))) {
@@ -87,10 +83,5 @@ for (const file of files) {
   cpSync(resolve(root, file), target);
 }
 writeFileSync(resolve(destination, ".nojekyll"), "");
-mkdirSync(resolve(destination, "Proof-R1"), { recursive: true });
-writeFileSync(
-  resolve(destination, "Proof-R1/index.html"),
-  '<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Proof-R1</title><link rel="canonical" href="https://xiaolizhang77.github.io/"><meta http-equiv="refresh" content="0;url=/"></head><body><p><a href="/">Continue to the Proof-R1 project page</a>.</p></body></html>\n'
-);
-console.log(`Built Proof-R1: ${files.length} source files, .nojekyll, and the /Proof-R1/ alias.`);
-console.log("Only the paper page and its assets are published; personal website sources remain archived in the repository.");
+console.log(`Built ${files.length} source files and .nojekyll. Paper homepage: /Proof-R1/.`);
+console.log("The root landing page is independent; personal website sources remain excluded from publication.");

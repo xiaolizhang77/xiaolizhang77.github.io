@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       url:
-        description: "Page path to check (leave empty for the homepage, or use blog.html)"
+        description: "Page path to check (Proof-R1/ or Proof-R1/blog.html; use / for the root landing page)"
+        default: "Proof-R1/"
         required: false
         type: string
 
@@ -35,7 +36,7 @@ jobs:
         run: npm install -g "chromedriver@$CHROMIUM_VERSION" @axe-core/cli http-server
       - name: Check accessibility
         env:
-          CHECK_PATH: ${{ inputs.url || '' }}
+          CHECK_PATH: ${{ inputs.url || 'Proof-R1/' }}
         run: |
           http-server _site/ -a 127.0.0.1 -p 8080 > /tmp/proof-r1-http.log 2>&1 &
           server_pid=$!

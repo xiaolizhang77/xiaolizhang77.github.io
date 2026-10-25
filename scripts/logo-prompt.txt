@@ -10,4 +10,4 @@ Text: none; no letters, wordmark, labels, or numbers.
 Avoid: mascot, generic AI brain, robots, shields, sparkles, circuit-board clutter, 3D rendering, textures, drop shadows, decorative frame, watermark, mockup, multiple variants.
 
 Generated using the built-in image_gen tool with transparent_background: true.
-Output: assets/proof-r1/logo.png
+Output: Proof-R1/assets/logo.png

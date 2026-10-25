@@ -6,10 +6,9 @@ on:
     paths:
       - "index.html"
       - "404.html"
-      - "blog.html"
       - "robots.txt"
       - "sitemap.xml"
-      - "assets/proof-r1/**"
+      - "Proof-R1/**"
       - "scripts/build-paper-site.mjs"
       - ".github/workflows/deploy.yml"
   pull_request:
@@ -17,10 +16,9 @@ on:
     paths:
       - "index.html"
       - "404.html"
-      - "blog.html"
       - "robots.txt"
       - "sitemap.xml"
-      - "assets/proof-r1/**"
+      - "Proof-R1/**"
       - "scripts/build-paper-site.mjs"
       - ".github/workflows/deploy.yml"
   workflow_dispatch:
