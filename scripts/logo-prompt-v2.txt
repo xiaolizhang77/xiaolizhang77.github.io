@@ -1,0 +1,9 @@
+Use case: logo-brand.
+Asset type: a replacement logo for Proof-R1, an academic project on learning machine-verifiable logical proofs through reinforcement learning.
+Design one outstanding, elegant and compact icon: a bold sculptural letter P constructed from a folded strip of paper, with a small verification check created naturally in its negative space. The fold symbolizes building a proof. The silhouette must read immediately at 32 px, with the careful geometric balance and optical polish of a professional identity studio. One coherent mark, at most two broad interlocking shapes; gracefully rounded corners and precise diagonal folds.
+Style: minimal flat vector-like design with a restrained two-tone folded-paper effect, crisp clean edges. Deep midnight indigo for the main shape and soft periwinkle for a single fold, matching a white academic website whose accent is #5351b9. Large open counters, generous breathing room, understated and intelligent.
+Composition: single centered icon in a square canvas, occupying about 82 percent of canvas dimensions. Genuinely transparent background.
+No surrounding text, no wordmark, no slogan, no border, no badge or enclosing square, no shadow, no 3D mockup, no texture, no watermark. Do not use branching graphs, connected dots, neural networks, robots, brains, shields, or clip-art ticks floating outside the mark. This is a fresh design, not a refinement of the prior proof-tree logo.
+
+Generated using the built-in image_gen tool with transparent_background: true.
+Output: Proof-R1/assets/logo-v2.png
