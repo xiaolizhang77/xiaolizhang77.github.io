@@ -1,0 +1,41 @@
+Proof-R1 logo v3 — selected final artwork
+Mode: built-in image_gen; transparent PNG.
+Output: Proof-R1/assets/logo-v3.png
+Selected image: exec-ceab1b7d-4847-48c6-9224-31be3feb5ebf.png
+Concept: geometric P, square negative space suggesting QED, integrated cyan checkmark, blue three-dimensional finish, smooth vertical stem.
+
+--- proof-r1-qed-preview-prompt.txt ---
+
+Mode: built-in image_gen; new generation; transparent preview.
+
+Use case: logo-brand.
+Asset type: a single logo concept preview for the research project Proof-R1.
+Primary request: create a refined geometric uppercase P monogram that unifies a checkmark and the square QED/end-of-proof symbol. The QED idea must be expressed by the P's own square negative-space counter, NOT a separate symbol placed inside the letter.
+Composition: one centered compact mark on a genuinely transparent square canvas, with generous clear margins. The main silhouette reads immediately as uppercase P: a continuous strong vertical stem extending clearly below the upper bowl, a squared bowl with carefully softened outside corners, and a generous near-square transparent inner counter. Integrate one crisp checkmark into this geometry: a short arm inside the counter and a longer arm rising toward the upper right through just one clean opening. Make the checkmark feel like a natural continuation of the P's bowl, not a sticker or an extra floating badge. Preserve ample open square-shaped space around the check. The left stem stays uninterrupted and the P must remain recognizable at favicon size.
+Style: minimal professional academic technology identity, flat vector-like graphic rendered as a raster image, mathematically clean contours, balanced optical weight, restrained geometric elegance. A strong simple silhouette suitable for 32-pixel use.
+Palette: deep vivid royal blue for the P and electric cyan for the checkmark; two harmonious flat colors with strong separation. Technology mood from color and precise geometry.
+Constraints: exactly ONE logo mark; no wordmark or caption. No letters other than the structural P, no QED text, no equations, no dots or therefore symbol, no proof tree, no nodes, no arrows, no circuitry, no small square inserted in the middle, no document icon, no decorative elements. No 3D, bevels, folds, extrusion, metallic material, glow, shadows, textures, mockups, border, watermark, or checkerboard drawn into the image. Clean alpha edges without debris. Keep the entire mark inside the canvas.
+
+
+--- proof-r1-qed-3d-preview-prompt.txt ---
+
+Mode: built-in image_gen; edit; transparent preview.
+
+Use case: precise-object-edit / logo-brand.
+Input image 1 is the EDIT TARGET: the approved square-counter P with integrated checkmark.
+Input image 2 is a MATERIAL, LIGHTING, AND DEPTH STYLE REFERENCE ONLY. Do NOT copy its composition or the unwanted diagram inside it.
+Request: give image 1 a clear, elegant three-dimensional sculpted finish like the earlier logo in image 2. Preserve image 1's P silhouette, continuous vertical stem, squared inner counter, checkmark position, and overall proportions.
+Add visible beveled edge planes, modest extruded side thickness, and smooth shaped surfaces. Use cyan highlight planes flowing into saturated cobalt blue front surfaces, deep indigo/violet on recessed and side planes. Make the checkmark feel like a gently sculpted cyan ribbon with a bright top ridge and a darker blue underside, while keeping the existing checkmark outline and recognizability. The P and check form one designed object. Soft directional studio light from the upper left, restrained specular highlights, convincing self-shading between surfaces. Clearly dimensional and polished, not a flat two-color icon; the colored faceting and blue/cyan shading should recall image 2.
+Keep a mostly front-on view so the P and square negative space remain unmistakable. All inner empty spaces and outer background remain truly transparent. Clean alpha edges without flecks or halos. Center the complete logo with clear margins.
+Do not reintroduce the rejected proof tree, boxes, arrows, dots, formulas, symbols, or any decoration in the middle. No text or labels. No ground plane, backdrop, cast shadow outside the mark, glass transparency, chrome, inflatable balloon rounding, heavy perspective tilt, separate floating pieces, watermark, or mockup. Only change material, relief, shading, and depth of image 1.
+
+
+--- proof-r1-smooth-stem-preview-prompt.txt ---
+
+Mode: built-in image_gen; edit; transparent preview.
+
+Use case: precise-object-edit.
+Edit the supplied Proof-R1 logo. Make ONE targeted refinement: smooth the geometry and shading of the P's vertical stem.
+The current stem has several unnatural triangular facets, diagonal panel boundaries across its front, and sharp polygonal joins at the upper-left corner and bottom foot. Remove those triangular planes and diagonal seams. Make the stem a single continuous broad face, with gently flowing blue-to-cyan shading and a narrow, consistent, softly rounded bevel around its perimeter. Smoothly blend the top of the stem into the P's upper bowl. Give the bottom foot an even rounded edge and continuous dark-blue sidewall, removing the sharp triangular wedge at its bottom-right corner. The geometry should look like one carefully manufactured solid, with natural continuous surface transitions.
+Keep the stem's straight upright silhouette, substantial width, flat broad front, and clear depth. Do not turn it into a cylinder, inflatable tube, or flat 2D shape. Maintain the existing sculpted three-dimensional appearance with restrained highlights and deep indigo side surfaces.
+Invariants: preserve the overall P silhouette, proportions, squared inner counter, cyan checkmark shape and position, right-hand bowl geometry, blue/cyan/indigo palette, frontal view, scale, framing, and transparent background. Keep the checkmark unchanged. No new symbols, lettering, circuitry, patterns, cuts, decorations, or objects. No external cast shadow or backdrop. Clean up stray alpha-edge flecks while preserving true transparency in the background and inner counter.
