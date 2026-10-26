@@ -439,9 +439,8 @@ figcaption > span:first-child {
   white-space: normal;
 }
 .motivation {
-  border-top: 1px solid var(--line);
-  margin-top: 52px;
-  padding-top: 40px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 40px;
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   gap: 45px;
@@ -1063,8 +1062,7 @@ body:has(dialog[open]) {
     padding-top: 12px;
   }
   .motivation {
-    margin-top: 35px;
-    padding-top: 30px;
+    padding-bottom: 30px;
     gap: 16px;
   }
   .motivation h3 {
