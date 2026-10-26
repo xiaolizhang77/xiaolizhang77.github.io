@@ -135,6 +135,32 @@
         <p class="eyebrow">02 / The framework</p>
         <h2 id="method-title">From generated text to verified proof.</h2>
         <p class="section-lead">Construct a proof state, trace the answer’s dependencies, and train on the actions that matter.</p>
+        <div class="motivation">
+          <div>
+            <p class="eyebrow">Why the proof matters</p>
+            <h3>“Not a manager” does not mean “no access.”</h3>
+            <p>
+              Alex is an engineer and not a manager. All engineers have access. A valid proof derives access from the engineer premise, with explicit
+              dependencies and a justified rule.
+            </p>
+            <p>Proof-R1 makes that distinction checkable at the level of individual reasoning actions.</p>
+          </div>
+          <figure>
+            <a
+              class="figure-link"
+              href="assets/fig2_contrast.png"
+              data-zoom
+              data-caption="An example from the paper contrasts an invalid inference with a structured, formally verifiable proof."
+              ><img
+                src="assets/fig2_contrast.png"
+                alt="Contrasting an invalid denial-of-the-antecedent inference with a valid proof that Alex has access because Alex is an engineer"
+                width="2409"
+                height="857"
+                loading="lazy"
+            /></a>
+            <figcaption>An illustrative example from the paper.</figcaption>
+          </figure>
+        </div>
         <figure class="wide-figure">
           <a
             class="figure-link"
@@ -148,10 +174,6 @@
               height="1051"
               loading="lazy"
           /></a>
-          <figcaption>
-            <span>Framework</span> Figure 3 in the paper. Verification governs the proof state; answer-supporting dependencies govern outcome credit.
-            <span class="zoom-hint">Click any figure to expand ↗</span>
-          </figcaption>
         </figure>
         <div class="method-steps">
           <article>
@@ -184,32 +206,6 @@
             </p>
             <code>action credit → aligned token spans</code>
           </article>
-        </div>
-        <div class="motivation">
-          <div>
-            <p class="eyebrow">Why the proof matters</p>
-            <h3>“Not a manager” does not mean “no access.”</h3>
-            <p>
-              Alex is an engineer and not a manager. All engineers have access. A valid proof derives access from the engineer premise, with explicit
-              dependencies and a justified rule.
-            </p>
-            <p>Proof-R1 makes that distinction checkable at the level of individual reasoning actions.</p>
-          </div>
-          <figure>
-            <a
-              class="figure-link"
-              href="assets/fig2_contrast.png"
-              data-zoom
-              data-caption="An example from the paper contrasts an invalid inference with a structured, formally verifiable proof."
-              ><img
-                src="assets/fig2_contrast.png"
-                alt="Contrasting an invalid denial-of-the-antecedent inference with a valid proof that Alex has access because Alex is an engineer"
-                width="2409"
-                height="857"
-                loading="lazy"
-            /></a>
-            <figcaption>An illustrative example from the paper.</figcaption>
-          </figure>
         </div>
       </section>
 
