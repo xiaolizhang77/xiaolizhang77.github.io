@@ -1,0 +1,10 @@
+Proof-R1 logo v4 — selected artwork without a checkmark.
+Output: Proof-R1/assets/logo-v4.png
+
+Mode: built-in image_gen; edit; transparent final artwork.
+
+Use case: precise-object-edit.
+Edit the supplied Proof-R1 logo (reference: Proof-R1/assets/logo-v3.png) to remove the entire cyan checkmark.
+Remove both checkmark arms, their thickness, highlights, undersides, and any shadows they cast. Where the long arm crosses the P's upper-right bowl, restore a seamless continuous P surface with the same blue/cyan sculpted material and smooth lighting as the surrounding letter. The inner counter should now be completely empty, transparent, generous, and approximately square with gently rounded corners. Nothing should remain floating or crossing the opening.
+Preserve everything else: the single uppercase P, its proportions and outer silhouette, broad smooth vertical stem without triangular facets, rounded foot, subtle bevels, three-dimensional thickness, blue-to-cyan highlights and deep indigo/violet side planes, frontal view, scale, and framing. Keep the rich dimensional finish, not a flat silhouette. Do not redesign the letter or add a replacement symbol.
+The result is ONLY one clean sculpted blue P with a hollow square counter on a truly transparent background. No checkmark, tick, diagonal ribbon, equations, dots, arrows, tree, circuitry, text, or extra ornament. Smooth clean alpha boundaries without stray colored specks, edge debris, backdrop, or external cast shadows.
