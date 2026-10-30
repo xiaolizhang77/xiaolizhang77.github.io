@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       url:
-        description: "Page path to check (Proof-R1/ or Proof-R1/blog.html; use / for the root landing page)"
+        description: "Page path to check (Proof-R1/, XRAG/, or either project's blog.html; use / for the project index)"
         default: "Proof-R1/"
         required: false
         type: string

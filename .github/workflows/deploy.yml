@@ -9,6 +9,7 @@ on:
       - "robots.txt"
       - "sitemap.xml"
       - "Proof-R1/**"
+      - "XRAG/**"
       - "scripts/build-paper-site.mjs"
       - ".github/workflows/deploy.yml"
   pull_request:
@@ -19,6 +20,7 @@ on:
       - "robots.txt"
       - "sitemap.xml"
       - "Proof-R1/**"
+      - "XRAG/**"
       - "scripts/build-paper-site.mjs"
       - ".github/workflows/deploy.yml"
   workflow_dispatch:

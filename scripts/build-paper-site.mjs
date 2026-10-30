@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = realpathSync(resolve(dirname(fileURLToPath(import.meta.url)), ".."));
 const destination = resolve(root, "_site");
 const requiredPages = ["index.html", "404.html", "robots.txt", "sitemap.xml"];
-const projectDirectory = "Proof-R1";
+const projectDirectories = ["Proof-R1", "XRAG"];
 const files = [];
 
 function assertInsideRoot(path) {
@@ -30,9 +30,11 @@ function collect(path) {
 }
 
 for (const page of requiredPages) collect(resolve(root, page));
-collect(resolve(root, projectDirectory));
-if (!files.includes(`${projectDirectory}/index.html`)) throw new Error("The Proof-R1 homepage is missing.");
-if (!files.some((file) => file.startsWith(`${projectDirectory}/assets/`))) throw new Error("No paper assets were found.");
+for (const projectDirectory of projectDirectories) {
+  collect(resolve(root, projectDirectory));
+  if (!files.includes(`${projectDirectory}/index.html`)) throw new Error(`The ${projectDirectory} homepage is missing.`);
+  if (!files.some((file) => file.startsWith(`${projectDirectory}/assets/`))) throw new Error(`No ${projectDirectory} assets were found.`);
+}
 
 const publishFiles = new Set(files);
 const htmlIds = new Map();
@@ -83,5 +85,5 @@ for (const file of files) {
   cpSync(resolve(root, file), target);
 }
 writeFileSync(resolve(destination, ".nojekyll"), "");
-console.log(`Built ${files.length} source files and .nojekyll. Paper homepage: /Proof-R1/.`);
+console.log(`Built ${files.length} source files and .nojekyll. Paper homepages: ${projectDirectories.map((name) => `/${name}/`).join(", ")}.`);
 console.log("The root landing page is independent; personal website sources remain excluded from publication.");

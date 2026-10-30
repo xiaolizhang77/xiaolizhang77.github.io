@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fafafc" />
+    <title>XRAG — eXamining the Core</title>
+    <meta
+      name="description"
+      content="XRAG benchmarks the foundational components of advanced retrieval-augmented generation: four core stages, five orchestrators, four unified datasets, and multidimensional evaluation."
+    />
+    <link rel="canonical" href="https://xiaolizhang77.github.io/XRAG/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="XRAG — eXamining the Core" />
+    <meta property="og:description" content="Benchmarking Foundational Components in Advanced Retrieval-Augmented Generation · ICDE 2026" />
+    <meta property="og:url" content="https://xiaolizhang77.github.io/XRAG/" />
+    <meta property="og:image" content="https://xiaolizhang77.github.io/XRAG/assets/framework.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link rel="stylesheet" href="assets/site.css" />
+    <script src="assets/site.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#overview">Skip to content</a>
+    <header class="site-nav">
+      <a class="brand" href="./" aria-label="XRAG home"><img src="assets/logo.png" alt="" width="32" height="32" />XRAG</a>
+      <nav aria-label="Main navigation">
+        <a href="#overview">Overview</a><a href="#method">Framework</a><a href="#results">Results</a><a href="#citation">BibTeX</a>
+      </nav>
+      <a class="language-link" href="blog.html" lang="zh-CN">中文解读 <span aria-hidden="true">↗</span></a>
+    </header>
+    <main>
+      <section class="hero" aria-labelledby="paper-title">
+        <div class="hero-brand"><img src="assets/logo.png" alt="XRAG logo" width="72" height="66" /><span>XRAG</span></div>
+        <p class="eyebrow">ICDE 2026 · Experiment, Analysis, and Benchmark</p>
+        <h1 id="paper-title">eXamining <span>the Core.</span></h1>
+        <p class="paper-subtitle">
+          Benchmarking Foundational Components<br class="desktop-break" />
+          in Advanced Retrieval-Augmented Generation
+        </p>
+        <div class="authors" aria-label="Paper authors">
+          <span>Qili Zhang<sup>1</sup></span
+          ><span>Qianren Mao<sup>2</sup></span
+          ><span>Yangyifei Luo<sup>1</sup></span
+          ><span>Yashuo Luo<sup>1</sup></span
+          ><span>Hanwen Hao<sup>1</sup></span
+          ><span>Zhilong Cao<sup>1</sup></span
+          ><span>Weifeng Jiang<sup>3</sup></span
+          ><span>Zhijun Chen<sup>1</sup></span
+          ><span>Junnan Liu<sup>1</sup></span
+          ><span>Feng Yan<sup>1</sup></span
+          ><span>Xiaolong Wang<sup>1</sup></span
+          ><span>Jinlong Zhang<sup>1</sup></span
+          ><span>Zhenting Huang<sup>1</sup></span
+          ><span>Zhixing Tan<sup>2</sup></span
+          ><span>Jie Sun<sup>2</sup></span
+          ><span>Bo Li<sup>1</sup></span
+          ><span>Jianxin Li<sup>1</sup></span
+          ><span>Philip S. Yu<sup>4</sup></span>
+        </div>
+        <div class="affiliations">
+          <span><sup>1</sup>Beihang University</span><span><sup>2</sup>Zhongguancun Laboratory</span
+          ><span><sup>3</sup>Nanyang Technological University</span><span><sup>4</sup>University of Illinois at Chicago</span>
+        </div>
+        <div class="resource-links">
+          <a class="button primary" href="assets/xrag.pdf" target="_blank" rel="noopener"
+            ><svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h5" /></svg
+            >Read the paper</a
+          >
+          <a class="button" href="https://github.com/DocAILab/XRAG" target="_blank" rel="noopener"
+            ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-14-2 18" /></svg>Code</a
+          >
+          <a class="button" href="https://arxiv.org/abs/2412.15529" target="_blank" rel="noopener"
+            ><span class="arxiv-icon" aria-hidden="true">χ</span>arXiv</a
+          >
+          <a class="button" href="blog.html"
+            ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM8 8h8M8 12h8M8 16h5" /></svg><span lang="zh-CN">中文解读</span></a
+          >
+        </div>
+        <p class="hero-takeaway">
+          Understand the components behind the answer.<br /><strong
+            >Compare modules. Compose workflows. Evaluate retrieval and generation together.</strong
+          >
+        </p>
+      </section>
+
+      <section class="overview section-tint" id="overview" aria-labelledby="overview-title">
+        <div class="content">
+          <p class="eyebrow">01 / The idea</p>
+          <h2 id="overview-title">Make RAG performance explainable.</h2>
+          <p class="section-lead">
+            XRAG opens up the pipeline so researchers can examine which components, workflows, and data characteristics shape the final answer.
+          </p>
+          <div class="abstract">
+            <h3>Abstract</h3>
+            <p>
+              Retrieval-augmented generation (RAG) synergizes the retrieval of pertinent database with the generative capabilities of Large Language
+              Models (LLMs), ensuring that the generated output is contextually relevant but also accurate and current. We introduce XRAG, an
+              open-source, modular codebase that facilitates exhaustive evaluation of the performance of foundational components of advanced RAG
+              modules.
+            </p>
+            <p>
+              These components are categorized into four core phases: pre-retrieval, retrieval, post-retrieval, and generation. We systematically
+              analyze them across reconfigured datasets, providing a comprehensive benchmark for their effectiveness. These components can be combined
+              in different ways through an orchestrator, of which there are five types: sequential, conditional, iterative, parallel, and hybrid. Our
+              work thoroughly evaluates the performance of advanced core components in RAG systems, offering actionable insights for optimizing RAG
+              architectures in dataset-driven AI applications.
+            </p>
+          </div>
+          <div class="highlights" aria-label="XRAG benchmark coverage">
+            <div>
+              <strong>4</strong>
+              <h3>Core stages</h3>
+              <p>From query preparation<br />to answer generation</p>
+            </div>
+            <div>
+              <strong>5</strong>
+              <h3>Orchestrators</h3>
+              <p>Sequential, conditional, iterative,<br />parallel, and hybrid</p>
+            </div>
+            <div>
+              <strong>40</strong>
+              <h3>Evaluation metrics</h3>
+              <p>7 retrieval · 10 generation<br />23 LLM-based metrics</p>
+            </div>
+          </div>
+          <p class="metric-note">
+            Four unified benchmarks: HotpotQA, DropQA, NaturalQA, and FinanceBench. Coverage and metric counts follow Tables I–II in the paper.
+          </p>
+        </div>
+      </section>
+
+      <section class="content section" id="method" aria-labelledby="method-title">
+        <p class="eyebrow">02 / The framework</p>
+        <h2 id="method-title">Open up the RAG pipeline.</h2>
+        <p class="section-lead">
+          A final answer score cannot tell you whether the bottleneck lies in retrieval, context processing, or generation. XRAG makes each stage
+          available for controlled comparison.
+        </p>
+        <figure class="wide-figure">
+          <a
+            class="figure-link"
+            href="assets/framework.png"
+            data-zoom
+            data-caption="XRAG framework: unified datasets support four component stages, five orchestrators, and three families of evaluators."
+            ><img
+              src="assets/framework.png"
+              alt="XRAG framework: unified datasets support four component stages, five orchestrators, and three families of evaluators."
+              width="2400"
+              height="1350"
+              loading="lazy"
+          /></a>
+        </figure>
+        <div class="method-steps xrag-stages">
+          <article>
+            <span class="step-number">01</span>
+            <h3>Pre-retrieval</h3>
+            <p class="method-acronym">Prepare the query</p>
+            <p>Examine query transformations such as Step-back Prompting and HyDE before searching the corpus.</p>
+          </article>
+          <article>
+            <span class="step-number">02</span>
+            <h3>Retrieval</h3>
+            <p class="method-acronym">Find the evidence</p>
+            <p>Compare BGE and JINA retrievers with methods such as reciprocal rank fusion and sentence-window retrieval.</p>
+          </article>
+          <article>
+            <span class="step-number">03</span>
+            <h3>Post-retrieval</h3>
+            <p class="method-acronym">Refine the context</p>
+            <p>Assess BGE and JINA rerankers to prioritize useful evidence before it reaches the generator.</p>
+          </article>
+          <article>
+            <span class="step-number">04</span>
+            <h3>Generation</h3>
+            <p class="method-acronym">Produce the answer</p>
+            <p>Evaluate open and closed LLMs through local deployment and API-based generation interfaces.</p>
+          </article>
+        </div>
+        <div class="xrag-subsection">
+          <p class="eyebrow">From modules to agentic workflows</p>
+          <h3>Five ways to connect the components.</h3>
+          <p class="section-lead">
+            Orchestrators control the flow of retrieval and generation: run a sequence, select a branch, iterate, combine parallel results, or mix
+            these strategies.
+          </p>
+          <figure class="wide-figure">
+            <a
+              class="figure-link"
+              href="assets/orchestrators.png"
+              data-zoom
+              data-caption="Five XRAG orchestrators: sequential, conditional, iterative, parallel, and hybrid retrieval-augmented generation workflows."
+              ><img
+                src="assets/orchestrators.png"
+                alt="Five XRAG orchestrators: sequential, conditional, iterative, parallel, and hybrid retrieval-augmented generation workflows."
+                width="2400"
+                height="1001"
+                loading="lazy"
+            /></a>
+            <figcaption>Figure 3: orchestration logic for agentic RAG.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section section-tint" id="results" aria-labelledby="results-title">
+        <div class="content">
+          <p class="eyebrow">03 / The evidence</p>
+          <h2 id="results-title">Compare the workflow, then examine the failure.</h2>
+          <p class="section-lead">
+            A shared benchmark reveals how orchestration changes answer quality, and why retrieving relevant evidence is only part of the story.
+          </p>
+          <div class="table-heading">
+            <div>
+              <h3>Orchestrator comparison</h3>
+              <p>Table XI · DeepSeek-R1-Distill-Llama-70B generator</p>
+            </div>
+            <div class="model-tabs" role="tablist" aria-label="Benchmark dataset" hidden>
+              <button type="button" id="tab-hqa" role="tab" aria-selected="true" aria-controls="table-hqa" data-model="hqa">HotpotQA</button
+              ><button type="button" id="tab-fqa" role="tab" aria-selected="false" aria-controls="table-fqa" tabindex="-1" data-model="fqa">
+                FinanceBench
+              </button>
+            </div>
+          </div>
+          <div id="table-hqa" class="table-panel" role="tabpanel" aria-labelledby="tab-hqa" tabindex="0">
+            <div class="table-scroll" tabindex="0" role="region" aria-label="HotpotQA results">
+              <table>
+                <caption>
+                  HotpotQA · Mean scores (%) from Table XI; higher is better.
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Method</th>
+                    <th scope="col">Orchestrator</th>
+                    <th scope="col">ChrF ↑</th>
+                    <th scope="col">METEOR ↑</th>
+                    <th scope="col">ROUGE-L ↑</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">BGE-Large</th>
+                    <td>Sequential</td>
+                    <td>26.06</td>
+                    <td>31.08</td>
+                    <td>17.17</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Self-RAG</th>
+                    <td>Conditional</td>
+                    <td>17.26</td>
+                    <td>13.00</td>
+                    <td>11.72</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">SIM-RAG</th>
+                    <td>Iterative</td>
+                    <td><strong>62.30</strong></td>
+                    <td><strong>52.39</strong></td>
+                    <td><strong>65.48</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">RRFusion</th>
+                    <td>Parallel</td>
+                    <td>23.14</td>
+                    <td>25.47</td>
+                    <td>24.59</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Adapt-RAG</th>
+                    <td>Hybrid</td>
+                    <td>31.20</td>
+                    <td>33.56</td>
+                    <td>23.17</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div id="table-fqa" class="table-panel" role="tabpanel" aria-labelledby="tab-fqa" tabindex="0">
+            <div class="table-scroll" tabindex="0" role="region" aria-label="FinanceBench results">
+              <table>
+                <caption>
+                  FinanceBench · Mean scores (%) from Table XI; higher is better.
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Method</th>
+                    <th scope="col">Orchestrator</th>
+                    <th scope="col">ChrF ↑</th>
+                    <th scope="col">METEOR ↑</th>
+                    <th scope="col">ROUGE-L ↑</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">BGE-Large</th>
+                    <td>Sequential</td>
+                    <td>19.82</td>
+                    <td><strong>19.14</strong></td>
+                    <td>11.20</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Self-RAG</th>
+                    <td>Conditional</td>
+                    <td>11.98</td>
+                    <td>7.87</td>
+                    <td>6.09</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">SIM-RAG</th>
+                    <td>Iterative</td>
+                    <td><strong>21.12</strong></td>
+                    <td>15.81</td>
+                    <td><strong>21.92</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">RRFusion</th>
+                    <td>Parallel</td>
+                    <td>18.83</td>
+                    <td>15.67</td>
+                    <td>10.91</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Adapt-RAG</th>
+                    <td>Hybrid</td>
+                    <td>19.97</td>
+                    <td>18.07</td>
+                    <td>12.16</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p class="table-note">
+            Selected generation metrics from the paper’s benchmark. Bold marks the best score in each column. Switch datasets to compare the same five
+            orchestration strategies.
+          </p>
+          <div class="xrag-result-insight">
+            <p>
+              On HotpotQA, the iterative SIM-RAG configuration reaches <strong>52.39 METEOR</strong>, compared with <strong>31.08</strong> for the
+              sequential BGE-Large configuration. On FinanceBench, the best method depends on the metric: a single orchestration choice does not lead
+              every column.
+            </p>
+            <a class="text-link" href="assets/xrag.pdf#page=11" target="_blank" rel="noopener"
+              >Explore the complete results <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="chart-pair xrag-diagnostics">
+            <figure class="">
+              <a
+                class="figure-link"
+                href="assets/retrieval-generation-hard.png"
+                data-zoom
+                data-caption="HotpotQA hard questions with GPT-4o-mini: answer ChrF++ distributions for Hit@1 retrieval hits and non-hits, with means of 0.28 and 0.14."
+                ><img
+                  src="assets/retrieval-generation-hard.png"
+                  alt="HotpotQA hard questions with GPT-4o-mini: answer ChrF++ distributions for Hit@1 retrieval hits and non-hits, with means of 0.28 and 0.14."
+                  width="1400"
+                  height="837"
+                  loading="lazy"
+              /></a>
+              <figcaption>
+                <strong>Retrieval and generation must be evaluated together.</strong> With GPT-4o-mini on the hard HotpotQA subset, mean ChrF++ is
+                0.28 for Hit@1 hits and 0.14 for misses. Some hits still produce weak answers. Figure 7(c).
+              </figcaption>
+            </figure>
+            <figure class="">
+              <a
+                class="figure-link"
+                href="assets/iterative-hard.png"
+                data-zoom
+                data-caption="SIM-RAG on hard HotpotQA questions: generation quality across retrieval iterations, including questions that reach the five-iteration cap."
+                ><img
+                  src="assets/iterative-hard.png"
+                  alt="SIM-RAG on hard HotpotQA questions: generation quality across retrieval iterations, including questions that reach the five-iteration cap."
+                  width="1400"
+                  height="833"
+                  loading="lazy"
+              /></a>
+              <figcaption>
+                <strong>More iterations do not guarantee a better answer.</strong> The hard-subset analysis shows that reaching the five-iteration
+                limit can still leave low-quality outputs. Figure 8(c).
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="content section" id="toolkit" aria-labelledby="toolkit-title">
+        <p class="eyebrow">04 / The open-source toolkit</p>
+        <h2 id="toolkit-title">From a benchmark to your own experiments.</h2>
+        <div class="xrag-toolkit">
+          <div>
+            <p class="section-lead">
+              Configure the data, choose the components, and inspect the results through XRAG’s command-line tools and Web UI.
+            </p>
+            <ol class="xrag-workflow">
+              <li>
+                <strong>Prepare a unified dataset.</strong><span>Connect queries, retrieved contexts, reference contexts, and expected answers.</span>
+              </li>
+              <li><strong>Compose a pipeline.</strong><span>Select the retriever, post-processor, generator, and workflow.</span></li>
+              <li><strong>Inspect both ends.</strong><span>Evaluate retrieval quality alongside answer quality and semantic consistency.</span></li>
+            </ol>
+            <div class="xrag-toolkit-links">
+              <a class="button primary" href="https://github.com/DocAILab/XRAG" target="_blank" rel="noopener">Explore the code ↗</a
+              ><a class="button" href="https://docailab.github.io/XRAG/" target="_blank" rel="noopener">Documentation ↗</a>
+            </div>
+            <p class="xrag-article-link">
+              <a class="text-link" href="https://mp.weixin.qq.com/s/GtruKuxDq7O819Fxua1mBw" target="_blank" rel="noopener" lang="zh-CN"
+                >阅读公众号原文 ↗</a
+              >
+            </p>
+          </div>
+          <figure class="xrag-ui-figure">
+            <a
+              class="figure-link"
+              href="assets/webui.png"
+              data-zoom
+              data-caption="XRAG Web UI from the paper: dataset and model configuration, retrieval setup, interactive generation, and evaluation."
+              ><img
+                src="assets/webui.png"
+                alt="XRAG Web UI from the paper: dataset and model configuration, retrieval setup, interactive generation, and evaluation."
+                width="2880"
+                height="2442"
+                loading="lazy"
+            /></a>
+            <figcaption>Figure 2: the XRAG interface presented in the paper.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="content section citation" id="citation" aria-labelledby="citation-title">
+        <p class="eyebrow">05 / Cite this work</p>
+        <div class="citation-heading">
+          <div>
+            <h2 id="citation-title">Build on XRAG.</h2>
+            <p>If you find XRAG useful, please consider citing our paper.</p>
+          </div>
+          <button class="button copy-button" type="button" id="copy-citation" hidden>Copy BibTeX <span aria-hidden="true">⧉</span></button>
+        </div>
+        <pre><code id="bibtex">@misc{zhang2026xragexaminingcore,
+  title=&#123;&#123;XRAG: eXamining the Core -- Benchmarking Foundational Components in Advanced Retrieval-Augmented Generation}},
+  author={Qili Zhang and Qianren Mao and Yangyifei Luo and Yashuo Luo and Hanwen Hao and Zhilong Cao and Weifeng Jiang and Zhijun Chen and Junnan Liu and Feng Yan and Xiaolong Wang and Jinlong Zhang and Zhenting Huang and Zhixing Tan and Jie Sun and Bo Li and Jianxin Li and Philip S. Yu},
+  year={2026},
+  eprint={2412.15529},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2412.15529}
+}</code></pre>
+        <div class="citation-bottom">
+          <a class="text-link" href="assets/citation.bib" download>Download .bib <span aria-hidden="true">↓</span></a
+          ><span id="copy-status" role="status" aria-live="polite"></span>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <a class="brand" href="./"><img src="assets/logo.png" alt="" width="28" height="28" />XRAG</a>
+      <p>eXamining the Core.</p>
+      <a href="../">All research projects <span aria-hidden="true">↗</span></a>
+    </footer>
+    <dialog id="figure-dialog" aria-labelledby="figure-caption">
+      <button class="dialog-close" type="button" aria-label="Close figure">×</button><img id="figure-full" alt="" />
+      <p id="figure-caption"></p>
+    </dialog>
+  </body>
+</html>

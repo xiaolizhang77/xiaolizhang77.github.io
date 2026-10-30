@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fafafc" />
+    <title>XRAG 中文解读 · 从组件到编排，系统评测 RAG</title>
+    <meta
+      name="description"
+      content="XRAG 论文中文解读：以四个阶段、五种编排方式和三类评估视角，分析高级 RAG 系统的组件选择、检索质量、生成表现与运行开销。"
+    />
+    <link rel="canonical" href="https://xiaolizhang77.github.io/XRAG/blog.html" />
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link rel="stylesheet" href="assets/site.css" />
+    <script src="assets/site.js" defer></script>
+  </head>
+  <body class="article-page">
+    <a class="skip-link" href="#article">跳至正文</a>
+    <header class="site-nav">
+      <a class="brand" href="./"><img src="assets/logo.png" alt="" width="35" height="32" />XRAG</a>
+      <a class="back-link" href="./">← 返回论文主页</a>
+    </header>
+    <main id="article" class="article-main">
+      <article>
+        <header class="article-header">
+          <p class="eyebrow">XRAG · ICDE 2026 · 中文解读</p>
+          <h1>从组件到编排，<br />系统评测 RAG</h1>
+          <p class="article-lead">
+            检索增强生成的效果取决于一整条处理链。XRAG
+            将这条链拆解为可替换的组件与可组合的工作流，在统一数据和评估条件下，帮助研究者看清每一环的作用。
+          </p>
+          <p class="article-meta">
+            基于论文整理 · <a href="https://mp.weixin.qq.com/s/GtruKuxDq7O819Fxua1mBw" target="_blank" rel="noopener noreferrer">阅读公众号原文 ↗</a>
+          </p>
+        </header>
+
+        <section aria-labelledby="components">
+          <h2 id="components">01 / 把效果差异定位到组件</h2>
+          <p>
+            搭建 RAG
+            系统时，查询改写、检索模型、重排序和生成模型都有多种选择。某个配置的最终答案更好，改进可能来自其中一个组件，也可能来自多个组件的配合。统一实验条件，才能比较这些选择的实际作用。
+          </p>
+          <p>XRAG 提供开源的模块化代码库，将核心组件组织为<strong>四个阶段</strong>：</p>
+          <ol>
+            <li><strong>检索前：</strong>建立语料索引，改写或扩展查询，为检索准备合适的输入。</li>
+            <li><strong>检索：</strong>从语料中寻找与问题相关的证据。</li>
+            <li><strong>检索后：</strong>对候选内容重新排序，提高送入模型的上下文质量。</li>
+            <li><strong>生成：</strong>让语言模型结合检索结果回答问题。</li>
+          </ol>
+          <figure>
+            <a href="assets/framework.png" data-zoom data-caption="XRAG 总体框架：统一数据、可替换组件、五类编排和三类评估。">
+              <img
+                src="assets/framework.png"
+                alt="XRAG 框架包含统一数据预处理器、检索前到生成的模块、五类编排器和 ConR、ConG、CogL 三类评估器。"
+                width="2400"
+                height="1350"
+                loading="lazy"
+              />
+            </a>
+            <figcaption>论文图 1：在统一框架中组合组件、执行流程并比较结果。</figcaption>
+          </figure>
+          <p>论文覆盖查询改写、不同检索单元、后处理技术以及多个系列的生成模型。模块可以单独替换，便于控制其他条件，分析某项选择带来的变化。</p>
+        </section>
+
+        <section aria-labelledby="orchestration">
+          <h2 id="orchestration">02 / 同一套模块，五种编排方式</h2>
+          <p>
+            模块决定每一步做什么，编排器决定这些步骤何时执行、如何衔接。XRAG 将 RAG
+            工作流归纳为<strong>顺序、条件、迭代、并行和混合</strong>五种方式，并在同一框架中进行对比。
+          </p>
+          <figure>
+            <a href="assets/orchestrators.png" data-zoom data-caption="五类 RAG 编排方式：顺序、条件、迭代、并行和混合。">
+              <img
+                src="assets/orchestrators.png"
+                alt="五类编排器的结构对比，展示线性执行、条件分支、循环检索、并行分支和混合工作流。"
+                width="2400"
+                height="1001"
+                loading="lazy"
+              />
+            </a>
+            <figcaption>论文图 3：编排方式改变信息获取与答案生成的路径。</figcaption>
+          </figure>
+          <ul>
+            <li><strong>顺序：</strong>沿固定链路完成检索与生成，适合建立清楚的基线。</li>
+            <li><strong>条件：</strong>根据问题或当前状态选择分支，决定是否检索、怎样检索。</li>
+            <li><strong>迭代：</strong>多轮获取和补充证据，逐步完善答案。</li>
+            <li><strong>并行：</strong>从多个分支获取信息，再融合结果。</li>
+            <li><strong>混合：</strong>组合多种控制方式，适应更复杂的问题。</li>
+          </ul>
+          <p>这一区分让研究者能够分别考察“换一个组件”和“换一种执行流程”的收益，并结合具体任务选择适合的结构。</p>
+        </section>
+
+        <section aria-labelledby="evaluation">
+          <h2 id="evaluation">03 / 同时检查证据与答案</h2>
+          <p>
+            XRAG 将 HotpotQA、DropQA、NaturalQA 和 FinanceBench
+            整理为统一数据格式，关联问题、检索上下文、标准证据、模型回答与参考答案。四个数据集覆盖多跳问答、离散推理、开放域问答和金融问答。
+          </p>
+          <p>评估由<strong>三类视角、40 项统一指标</strong>构成，分别回答不同的问题：</p>
+          <div class="table-wrap" role="region" aria-label="XRAG 三类评估视角" tabindex="0">
+            <table>
+              <caption>
+                论文表 I：7 项 ConR、10 项 ConG、23 项 CogL 指标
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">评估视角</th>
+                  <th scope="col">主要关注</th>
+                  <th scope="col">代表指标或维度</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">ConR · 检索评估</th>
+                  <td>相关证据是否被找到、排在什么位置</td>
+                  <td>F1、MRR、Hit@1、MAP、NDCG</td>
+                </tr>
+                <tr>
+                  <th scope="row">ConG · 生成评估</th>
+                  <td>生成答案与参考答案的文本匹配程度</td>
+                  <td>ChrF、METEOR、ROUGE 等</td>
+                </tr>
+                <tr>
+                  <th scope="row">CogL · LLM 评估</th>
+                  <td>从语义层面检查证据和回答</td>
+                  <td>相关性、正确性、忠实性等</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>联合观察这些指标，可以区分检索遗漏、证据使用不充分和生成偏差，也能发现不同指标对同一回答的评价差异。</p>
+        </section>
+
+        <section aria-labelledby="retrieval-insight">
+          <h2 id="retrieval-insight">04 / 难题更依赖检索到的证据</h2>
+          <p>
+            在 HotpotQA 困难子集上，论文按首位检索结果是否命中标准证据，对生成质量进行分组分析。使用 GPT-4o-mini 时，Hit@1 命中组的 ChrF++ 均值为
+            <strong>0.28</strong>，未命中组为 <strong>0.14</strong>。
+          </p>
+          <figure>
+            <a
+              href="assets/retrieval-generation-hard.png"
+              data-zoom
+              data-caption="HotpotQA 困难子集：Hit@1 命中与未命中时的生成质量分布，GPT-4o-mini。"
+            >
+              <img
+                src="assets/retrieval-generation-hard.png"
+                alt="HotpotQA 困难子集的生成质量分布：Hit@1 命中组 ChrF++ 均值为 0.28，未命中组为 0.14。"
+                width="1400"
+                height="837"
+                loading="lazy"
+              />
+            </a>
+            <figcaption>论文图 7(c)：有效证据与难题回答质量密切相关。</figcaption>
+          </figure>
+          <p>
+            这一结果支持优先提高证据相关性和排序质量。与此同时，命中证据的样本中仍有低质量答案，因此评估还需要继续追踪模型是否正确使用了证据。论文对上下文数量的分析也表明，增加检索条数带来的收益有限，证据质量是更直接的优化目标。
+          </p>
+        </section>
+
+        <section aria-labelledby="workflow-insight">
+          <h2 id="workflow-insight">05 / 让工作流适配任务与预算</h2>
+          <p>
+            在多跳问答中，迭代检索可以逐步补齐推理所需的信息。论文表 XI 在统一的 DeepSeek-R1-Distill-Llama-70B 生成模型下比较编排器：HotpotQA
+            上，顺序基线的 METEOR 为 <strong>31.08</strong>，SIM-RAG 达到 <strong>52.39</strong>。
+          </p>
+          <p>
+            进一步分析迭代轮数时，论文将 SIM-RAG 的最大轮数设为 5。在困难子集中，有
+            <strong>52 个问题</strong>达到了这个上限。达到上限的问题仍可能难以回答，更多轮次本身并不保证更好的答案。
+          </p>
+          <figure>
+            <a href="assets/iterative-hard.png" data-zoom data-caption="HotpotQA 困难子集：SIM-RAG 迭代轮数、问题数量与生成质量，最大迭代轮数为 5。">
+              <img
+                src="assets/iterative-hard.png"
+                alt="SIM-RAG 在 HotpotQA 困难子集上的迭代分析，52 个问题达到 5 轮上限，达到上限的样本仍存在低质量回答。"
+                width="1400"
+                height="833"
+                loading="lazy"
+              />
+            </a>
+            <figcaption>论文图 8(c)：结合问题难度与停止条件理解迭代收益。</figcaption>
+          </figure>
+          <p>
+            XRAG 还记录各阶段延时与总 token
+            消耗，使效果评估与运行成本可以一起比较。论文的实验分析显示，重排序在多个数据集上取得稳定收益；复杂编排则需要结合任务难度和延时预算选择。
+          </p>
+        </section>
+
+        <section aria-labelledby="get-started">
+          <h2 id="get-started">06 / 从自己的数据开始比较</h2>
+          <p>
+            XRAG 提供代码、配置接口和 Web
+            UI，支持组装流程并查看评估结果。把它用于新任务时，可以先建立固定的顺序基线，再依次比较检索器、后处理与编排方式，结合检索质量、答案表现和运行成本选取配置。
+          </p>
+          <p>
+            项目的安装和使用方式见
+            <a href="https://github.com/DocAILab/XRAG" target="_blank" rel="noopener noreferrer">GitHub 仓库 ↗</a
+            >。完整实验设置、结果和分析见论文，公众号文章提供另一种阅读入口。
+          </p>
+          <div class="paper-reference">
+            <p>
+              <strong>论文</strong><br />XRAG: eXamining the Core - Benchmarking Foundational Components in Advanced Retrieval-Augmented Generation
+            </p>
+            <p><strong>发表</strong><br />ICDE 2026</p>
+            <p><strong>机构</strong><br />北京航空航天大学 · 中关村实验室 · 南洋理工大学 · 伊利诺伊大学芝加哥分校</p>
+            <p>
+              <a href="assets/xrag.pdf" target="_blank" rel="noopener noreferrer">论文 PDF ↗</a><span aria-hidden="true"> · </span
+              ><a href="https://arxiv.org/abs/2412.15529" target="_blank" rel="noopener noreferrer">arXiv ↗</a><span aria-hidden="true"> · </span
+              ><a href="https://mp.weixin.qq.com/s/GtruKuxDq7O819Fxua1mBw" target="_blank" rel="noopener noreferrer">公众号原文 ↗</a
+              ><span aria-hidden="true"> · </span><a href="./#citation">引用格式</a>
+            </p>
+          </div>
+        </section>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <p>XRAG · eXamining the Core</p>
+      <a href="./">返回论文主页 ↑</a>
+    </footer>
+    <dialog id="figure-dialog" aria-labelledby="figure-caption">
+      <button class="dialog-close" type="button" aria-label="关闭图表">×</button>
+      <img id="figure-full" alt="" />
+      <p id="figure-caption"></p>
+    </dialog>
+  </body>
+</html>
