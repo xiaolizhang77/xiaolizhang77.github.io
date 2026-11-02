@@ -4,10 +4,16 @@ on:
   workflow_dispatch:
     inputs:
       url:
-        description: "Published page path to check (/, publications/, Proof-R1/, XRAG/, or either paper's blog.html)"
+        description: "Published static page to check"
         default: "/"
         required: false
-        type: string
+        type: choice
+        options:
+          - "/"
+          - "Proof-R1/"
+          - "Proof-R1/blog.html"
+          - "XRAG/"
+          - "XRAG/blog.html"
 
 permissions:
   contents: read

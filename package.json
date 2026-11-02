@@ -1,10 +1,11 @@
 {
   "scripts": {
-    "build": "bundle exec jekyll build && node scripts/validate-built-site.mjs",
-    "check:site": "node scripts/validate-built-site.mjs"
+    "build": "node scripts/build-site.mjs",
+    "check:site": "node scripts/validate-built-site.mjs",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
   },
   "devDependencies": {
-    "@shopify/prettier-plugin-liquid": "^1.10.0",
     "prettier": "^3.8.0"
   }
 }

@@ -24,12 +24,12 @@ All commit messages should follow this format:
 **Examples:**
 
 ```
-feat: Add dark mode toggle button to header
-fix: Correct baseurl in project site configuration
-docs: Update INSTALL.md with Docker troubleshooting
-style: Format all Liquid templates with Prettier
-config: Enable blog section in _config.yml
-chore: Update Jekyll dependencies with bundle update --all
+feat: Add a new personal homepage
+fix: Correct a paper page asset URL
+docs: Update README.md with local preview instructions
+style: Format static pages with Prettier
+config: Update the deployed-site accessibility checks
+chore: Update locked npm development dependencies
 ```
 
 ## Staging Changes
@@ -40,8 +40,8 @@ chore: Update Jekyll dependencies with bundle update --all
 
 **Always obey the project's [`.gitignore`](../.gitignore) file.** It prevents the accidental commit of:
 
-- Build outputs (`_site/`, `.jekyll-cache/`)
-- Dependencies (`node_modules/`, `vendor/`)
+- Build outputs (`_site/`) and local previews (`.codex-preview/`)
+- Dependencies (`node_modules/`)
 - OS-specific files (`.DS_store`)
 - Editor temporary files (`.idea/`, `.swp`, `.swo`)
 - Secrets and API keys (never commit credentials)

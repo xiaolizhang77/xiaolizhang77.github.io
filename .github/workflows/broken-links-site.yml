@@ -35,11 +35,16 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: gh-pages
-          path: .codex-preview/deployed-site
+          path: .codex-preview/deployed-source
           persist-credentials: false
+      - name: Export the published files for a manual check
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          mkdir -p .codex-preview/deployed-site
+          git -C .codex-preview/deployed-source archive HEAD | tar -x -C .codex-preview/deployed-site
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Validate the personal site, paper pages, and local links
+      - name: Validate the static pages, paper assets, and local links
         run: node scripts/validate-built-site.mjs --directory .codex-preview/deployed-site

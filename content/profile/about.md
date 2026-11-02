@@ -1,0 +1,3 @@
+Qili Zhang is currently a third-year Ph.D. candidate at the National Superior College for Engineers, Beihang University. He has received the BS degree from School of Computer Science and Engineering at Beihang University.
+
+His research focuses on data security for LLMs, Agents, and RAG systems. This includes investigating privacy threats like membership inference attacks against LLMs, advancing the core technology of Retrieval-Augmented Generation (RAG) through modular architecture and Deep Search techniques, and exploring the integration of federated learning into RAG systems to build secure, efficient, and privacy-preserving AI frameworks. He has long been attentive to cutting-edge security trends and the latest developments in LLM technology.

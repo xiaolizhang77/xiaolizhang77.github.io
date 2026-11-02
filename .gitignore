@@ -1,16 +1,11 @@
-_site
-.bundle
-.DS_store
-.idea
-.jekyll-cache
-.jekyll-metadata
-.ruby-version
-.sass-cache
-.tweet-cache
-.venv
-assets/libs/
-assets/rendercv/rendercv_output/*.typ
-Gemfile.lock
+_site/
 node_modules/
-vendor
 .codex-preview/
+.DS_store
+.idea/
+# Local artifacts left from the retired Jekyll site.
+.jekyll-cache/
+.jekyll-metadata
+.bundle/
+.sass-cache/
+vendor/

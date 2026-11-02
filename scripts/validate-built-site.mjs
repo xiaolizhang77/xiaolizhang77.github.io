@@ -9,7 +9,7 @@ if (args.length && (args.length !== 2 || args[0] !== "--directory")) {
 }
 const directory = resolve(root, args[1] || "_site");
 if (!existsSync(directory) || !lstatSync(directory).isDirectory()) {
-  throw new Error("Build the complete Jekyll site before validating it.");
+  throw new Error("Run npm run build before validating the site.");
 }
 
 function collect(path, base) {
@@ -20,52 +20,21 @@ function collect(path, base) {
 }
 
 const published = new Set(collect(directory, directory));
-const required = [
-  "index.html",
-  "404.html",
-  "robots.txt",
-  "sitemap.xml",
-  "publications/index.html",
-  "repositories/index.html",
-  "cv/index.html",
-  "assets/img/pic.jpg",
-  "Proof-R1/index.html",
-  "Proof-R1/blog.html",
-  "XRAG/index.html",
-  "XRAG/blog.html",
-];
-for (const file of required) {
+const rootFiles = ["index.html", "404.html", "robots.txt", "sitemap.xml", ".nojekyll"];
+const paperFiles = ["Proof-R1", "XRAG"].flatMap((project) => collect(resolve(root, project), root));
+const expected = new Set([...rootFiles, ...paperFiles]);
+for (const file of expected) {
   if (!published.has(file)) throw new Error(`Missing published page or asset: ${file}`);
-}
-for (const prefix of ["scripts/", "_pages/", "_data/", "projects/", "teaching/"]) {
-  if ([...published].some((file) => file.startsWith(prefix))) {
-    throw new Error(`Internal source or unfinished template was published: ${prefix}`);
+  if (!readFileSync(resolve(root, file)).equals(readFileSync(resolve(directory, file)))) {
+    throw new Error(`Published file changed during the build: ${file}`);
   }
 }
-for (const file of [
-  "AGENTS.md",
-  "CLAUDE.md",
-  "PAPER_SITE.md",
-  "assets/pdf/cv.pdf",
-  "assets/json/resume.json",
-  "assets/rendercv/rendercv_output/Albert_Einstein_CV.pdf",
-]) {
-  if (published.has(file)) throw new Error(`Excluded template or internal document was published: ${file}`);
+for (const file of published) {
+  if (!expected.has(file)) throw new Error(`File outside the publication allowlist: ${file}`);
 }
 const home = readFileSync(resolve(directory, "index.html"), "utf8");
-if (!home.includes("Qili") || !home.includes('href="/Proof-R1/"') || !home.includes('href="/XRAG/"')) {
-  throw new Error("The root page must render the personal homepage with links to both paper websites.");
-}
-
-// Jekyll must copy the self-contained paper sites without rendering or changing them.
-let paperFileCount = 0;
-for (const project of ["Proof-R1", "XRAG"]) {
-  for (const file of collect(resolve(root, project), root)) {
-    if (!published.has(file) || !readFileSync(resolve(root, file)).equals(readFileSync(resolve(directory, file)))) {
-      throw new Error(`Paper site asset missing or changed during the build: ${file}`);
-    }
-    paperFileCount++;
-  }
+if (!home.includes('href="/Proof-R1/"') || !home.includes('href="/XRAG/"')) {
+  throw new Error("The root page must link to both paper websites.");
 }
 
 const pageIds = new Map();
@@ -115,9 +84,9 @@ for (const file of stylesheets) {
 }
 
 const sitemap = readFileSync(resolve(directory, "sitemap.xml"), "utf8");
-for (const path of ["/", "/publications/", "/cv/", "/Proof-R1/", "/XRAG/"]) {
+for (const path of ["/", "/Proof-R1/", "/Proof-R1/blog.html", "/XRAG/", "/XRAG/blog.html"]) {
   if (!sitemap.includes(`<loc>https://xiaolizhang77.github.io${path}</loc>`)) {
     throw new Error(`Missing canonical page in sitemap: ${path}`);
   }
 }
-console.log(`Validated the personal homepage, ${pageIds.size} HTML pages, and ${paperFileCount} unchanged paper-site files.`);
+console.log(`Validated ${pageIds.size} HTML pages and ${paperFiles.length} unchanged paper-site files; no retired template files were published.`);
