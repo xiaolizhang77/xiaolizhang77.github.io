@@ -31,18 +31,11 @@ ninja.data = [{
             window.location.href = "/cv/";
           },
         },{
-        id: 'social-cv',
-        title: 'CV',
-        section: 'Socials',
-        handler: () => {
-          window.open("/assets/pdf/cv.pdf", "_blank");
-        },
-      },{
         id: 'social-email',
         title: 'email',
         section: 'Socials',
         handler: () => {
-          window.open("mailto:%7A%68%61%6E%67%71%6C%32%30%32%33@%6D%61%69%6C.%7A%67%63%6C%61%62.%65%64%75.%63%6E", "_blank");
+          window.open("mailto:%7A%68%61%6E%67%71%69%6C%69@%62%75%61%61.%65%64%75.%63%6E", "_blank");
         },
       },{
         id: 'social-rss',
