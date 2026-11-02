@@ -11,7 +11,7 @@
     />
     <link rel="canonical" href="https://xiaolizhang77.github.io/XRAG/blog.html" />
     <link rel="icon" type="image/png" href="assets/logo.png" />
-    <link rel="stylesheet" href="assets/site.css" />
+    <link rel="stylesheet" href="assets/site.css?v=ac64c075b1b7" />
     <script src="assets/site.js" defer></script>
   </head>
   <body class="article-page">
@@ -47,15 +47,17 @@
             <li><strong>检索后：</strong>对候选内容重新排序，提高送入模型的上下文质量。</li>
             <li><strong>生成：</strong>让语言模型结合检索结果回答问题。</li>
           </ol>
-          <figure>
-            <a href="assets/framework.png" data-zoom data-caption="XRAG 总体框架：统一数据、可替换组件、五类编排和三类评估。">
-              <img
-                src="assets/framework.png"
-                alt="XRAG 框架包含统一数据预处理器、检索前到生成的模块、五类编排器和 ConR、ConG、CogL 三类评估器。"
-                width="2400"
-                height="1350"
-                loading="lazy"
-              />
+          <figure class="xrag-framework">
+            <a class="figure-link" href="assets/framework.png" data-zoom data-caption="XRAG 总体框架：统一数据、可替换组件、五类编排和三类评估。">
+              <span class="xrag-framework-crop">
+                <img
+                  src="assets/framework.png"
+                  alt="XRAG 框架包含统一数据预处理器、检索前到生成的模块、五类编排器和 ConR、ConG、CogL 三类评估器。"
+                  width="2400"
+                  height="1350"
+                  loading="lazy"
+                />
+              </span>
             </a>
             <figcaption>论文图 1：在统一框架中组合组件、执行流程并比较结果。</figcaption>
           </figure>

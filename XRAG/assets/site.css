@@ -1177,6 +1177,27 @@ body:has(dialog[open]) {
 }
 
 /* XRAG uses the same visual system as the Proof-R1 paper page. */
+.xrag-framework .figure-link {
+  padding: clamp(6px, 1vw, 10px);
+}
+.xrag-framework-crop {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 2340 / 1136;
+}
+.xrag-framework .xrag-framework-crop img {
+  /* Show (30, 107)–(2370, 1243) of the original 2400 × 1350 canvas. */
+  position: absolute;
+  width: calc(100% * 2400 / 2340);
+  max-width: none;
+  height: auto;
+  left: calc(-100% * 30 / 2340);
+  top: calc(-100% * 107 / 1136);
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
 .hero h1 {
   word-spacing: 0.12em;
 }

@@ -187,6 +187,7 @@ exclude:
   - _pages/projects.md
   - _pages/teaching.md
   - assets/json/resume.json
+  - assets/pdf/cv.pdf
   - assets/rendercv/design.yaml
   - assets/rendercv/locale.yaml
   - assets/rendercv/settings.yaml

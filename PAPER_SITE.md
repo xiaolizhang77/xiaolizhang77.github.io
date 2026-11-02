@@ -12,8 +12,8 @@ The paper directories are excluded from Jekyll Minifier. A small post-write hook
 ## Edit and preview
 
 - Biography and paper links: `_pages/about.md`.
-- Publications: `_bibliography/papers.bib`.
-- Web CV: `_data/cv.yml`; downloadable CV: `assets/pdf/cv.pdf`.
+- Publications: `_bibliography/papers.bib`, synchronized with the six entries on [Google Scholar](https://scholar.google.com/citations?user=MKR62vEAAAAJ&hl=zh-CN) on 2026-11-02.
+- Web CV: `_data/cv.yml`. The old PDF is retained in source but excluded from publication; its download and search entries have been removed.
 - Contact: `_data/socials.yml`; repositories: `_data/repositories.yml`.
 - Paper websites: each project's `index.html`, `blog.html`, and `assets/`.
 
@@ -47,17 +47,13 @@ Do not add a static root `index.html`, `404.html`, or `sitemap.xml`: the About p
 
 ## Content still to finish
 
-Reviewed on 2026-11-02. Existing personal information has been retained; missing facts have not been invented.
+Reviewed on 2026-11-02. The biography now says “third-year,” the public email is `zhangqili@buaa.edu.cn`, and the publications match the user's Google Scholar list. Beihang University links to its verified official homepage. A public official website for Zhongguancun Laboratory could not be verified, so its name is displayed without a placeholder link.
 
-| Area             | Follow-up                                                                                                                                  | Source                                                                  |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
-| Biography        | Confirm the current Ph.D. year/status; the text still says “second-year.”                                                                  | `_pages/about.md`                                                       |
-| Affiliations     | Replace the two `href='#'` links with the intended university/laboratory pages.                                                            | `_pages/about.md`                                                       |
-| Public CV PDF    | Update the older undergraduate/2024-focused CV and remove its application-specific closing paragraph.                                      | `assets/pdf/cv.pdf`                                                     |
-| Web CV           | Add research/internship experience, teaching assistance, awards, and publications as appropriate; only Education and Skills are populated. | `_data/cv.yml`                                                          |
-| Contact          | Confirm the preferred public email; the social configuration, web CV, and old PDF differ.                                                  | `_data/socials.yml`, `_data/cv.yml`, CV PDF                             |
-| Publications     | Update XRAG's older author list/year and add Proof-R1 to the bibliography. Current paper-site citations can be reused.                     | `_bibliography/papers.bib`, both paper-site `assets/citation.bib` files |
-| Optional details | Add a contact note, favicon/share image, news, teaching, projects, or more repositories only if needed.                                    | `_config.yml`, `_data/`, `_pages/`                                      |
+| Area             | Follow-up                                                                                                                                  | Source                             |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------- |
+| Web CV           | Add research/internship experience, teaching assistance, awards, and publications as appropriate; only Education and Skills are populated. | `_data/cv.yml`                     |
+| Laboratory link  | Add a verified official website if one becomes available.                                                                                  | `_pages/about.md`                  |
+| Optional details | Add a contact note, favicon/share image, news, teaching, projects, or more repositories only if needed.                                    | `_config.yml`, `_data/`, `_pages/` |
 
 The erroneous Einstein INSPIRE social link has been removed. The unused Einstein JSON/PDF samples and unfinished teaching/projects pages remain in source but are excluded from publication. The active CV uses `_data/cv.yml`; JSONResume loading is disabled until its sample is replaced.
 

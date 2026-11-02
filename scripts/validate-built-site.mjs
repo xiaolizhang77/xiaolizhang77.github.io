@@ -29,7 +29,6 @@ const required = [
   "repositories/index.html",
   "cv/index.html",
   "assets/img/pic.jpg",
-  "assets/pdf/cv.pdf",
   "Proof-R1/index.html",
   "Proof-R1/blog.html",
   "XRAG/index.html",
@@ -43,7 +42,14 @@ for (const prefix of ["scripts/", "_pages/", "_data/", "projects/", "teaching/"]
     throw new Error(`Internal source or unfinished template was published: ${prefix}`);
   }
 }
-for (const file of ["AGENTS.md", "CLAUDE.md", "PAPER_SITE.md", "assets/json/resume.json", "assets/rendercv/rendercv_output/Albert_Einstein_CV.pdf"]) {
+for (const file of [
+  "AGENTS.md",
+  "CLAUDE.md",
+  "PAPER_SITE.md",
+  "assets/pdf/cv.pdf",
+  "assets/json/resume.json",
+  "assets/rendercv/rendercv_output/Albert_Einstein_CV.pdf",
+]) {
   if (published.has(file)) throw new Error(`Excluded template or internal document was published: ${file}`);
 }
 const home = readFileSync(resolve(directory, "index.html"), "utf8");
@@ -71,7 +77,9 @@ function openingTags(html) {
 
 for (const file of [...published].filter((file) => extname(file) === ".html")) {
   const html = readFileSync(resolve(directory, file), "utf8");
-  if (/\{%|\{\{/.test(html)) throw new Error(`Unrendered Liquid in page: ${file}`);
+  // Code samples such as BibTeX titles can legitimately contain literal {{...}}.
+  const renderedContent = html.replace(/<(pre|code)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, "");
+  if (/\{%|\{\{/.test(renderedContent)) throw new Error(`Unrendered Liquid in page: ${file}`);
   pageIds.set(file, new Set([...openingTags(html).matchAll(/\sid\s*=\s*["']([^"']+)["']/gi)].map((match) => match[1])));
 }
 
