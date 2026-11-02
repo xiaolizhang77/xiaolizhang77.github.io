@@ -6,12 +6,14 @@ For recurring monitoring or inspection, use an interval of at least two hours un
 
 ## Project
 
-This repository is a static project directory plus the independent `Proof-R1/` and `XRAG/` paper websites. The old al-folio/Jekyll personal homepage has been removed at the user's request.
+This repository contains a new static personal homepage (`index.html` and `homepage/`) plus the independent `Proof-R1/` and `XRAG/` paper websites. The old al-folio/Jekyll personal homepage has been removed at the user's request.
 
 Read [.github/copilot-instructions.md](.github/copilot-instructions.md) and [README.md](README.md) before editing. Follow [.github/GIT_WORKFLOW.md](.github/GIT_WORKFLOW.md) for commits.
 
 - Preserve both paper paths and assets unless the user requests changes to them.
 - Keep saved material in `content/profile/` out of published output.
+- Keep the six static publication entries in `index.html` synchronized with `content/profile/publications.bib`.
+- Put new homepage assets in `homepage/`. Existing paper logos and images may be referenced without editing the paper directories.
 - Edit source files, never generated `_site/` or the `gh-pages` branch.
 - Keep the build and validator publication allowlists synchronized when adding files.
 - Do not invent personal details or publication metadata.

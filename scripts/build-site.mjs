@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const root = realpathSync(resolve(dirname(fileURLToPath(import.meta.url)), ".."));
 const output = resolve(root, "_site");
-const entries = ["index.html", "404.html", "robots.txt", "sitemap.xml", ".nojekyll", "Proof-R1", "XRAG"];
+const entries = ["index.html", "404.html", "robots.txt", "sitemap.xml", ".nojekyll", "homepage", "Proof-R1", "XRAG"];
 
 function checkTree(path) {
   const stat = lstatSync(path);
@@ -37,4 +37,4 @@ mkdirSync(output);
 for (const entry of entries) cpSync(resolve(root, entry), resolve(output, entry), { recursive: true });
 
 await import("./validate-built-site.mjs");
-console.log("Built the paper websites and root project links in _site/.");
+console.log("Built the personal homepage and unchanged paper websites in _site/.");

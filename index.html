@@ -3,79 +3,424 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Research projects: Proof-R1 and XRAG." />
+    <meta name="theme-color" content="#fbfbfd" />
+    <title>Qili Zhang · Beihang University</title>
+    <meta
+      name="description"
+      content="Qili Zhang is a third-year Ph.D. candidate at Beihang University and Zhongguancun Laboratory, researching LLM security, verifiable reasoning, and retrieval-augmented generation."
+    />
     <link rel="canonical" href="https://xiaolizhang77.github.io/" />
-    <title>Research projects</title>
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        background: #fafafc;
-        color: #17202e;
-        font:
-          18px/1.7 system-ui,
-          sans-serif;
-      }
-      main {
-        width: min(720px, calc(100% - 48px));
-        margin: 15vh auto;
-      }
-      h1 {
-        font-size: clamp(30px, 6vw, 42px);
-        letter-spacing: -1px;
-        margin: 0 0 36px;
-      }
-      a {
-        display: block;
-        padding: 26px 30px;
-        border: 1px solid #e3e5ed;
-        border-radius: 12px;
-        color: inherit;
-        background: white;
-        text-decoration: none;
-      }
-      a:hover {
-        border-color: #5351b9;
-      }
-      a + a {
-        margin-top: 20px;
-      }
-      a:focus-visible {
-        outline: 3px solid #7976d8;
-        outline-offset: 5px;
-      }
-      strong {
-        display: flex;
-        justify-content: space-between;
-        color: #5351b9;
-        font-size: 24px;
-      }
-      p {
-        margin: 12px 0 0;
-      }
-      small {
-        display: block;
-        color: #5f6877;
-        font-size: 16px;
-        margin-top: 6px;
-      }
-    </style>
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Qili Zhang · Beihang University" />
+    <meta
+      property="og:description"
+      content="Research on secure language models, verifiable reasoning, and retrieval-augmented generation. Explore my projects and publications."
+    />
+    <meta property="og:url" content="https://xiaolizhang77.github.io/" />
+    <meta property="og:image" content="https://xiaolizhang77.github.io/homepage/portrait.jpg" />
+    <link rel="icon" type="image/svg+xml" href="/homepage/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Manrope:wght@500;600;650;700;750;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/homepage/style.css?v=3" />
+    <script src="/homepage/script.js?v=2" defer></script>
   </head>
-  <body>
-    <main>
-      <h1>Research projects</h1>
-      <a href="/Proof-R1/"
-        ><strong>Proof-R1 <span aria-hidden="true">→</span></strong>
-        <p>Learning to Prove, Not Just to Answer</p>
-        <small>Reinforcement learning from formal verification for natural-language logical reasoning.</small></a
-      >
-      <a href="/XRAG/"
-        ><strong>XRAG <span aria-hidden="true">→</span></strong>
-        <p>eXamining the Core</p>
-        <small>Benchmarking foundational components in advanced retrieval-augmented generation.</small></a
-      >
+  <body id="top">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="header-inner container">
+        <a class="wordmark" href="#top" aria-label="Qili Zhang, back to top"
+          ><span class="monogram" aria-hidden="true">qz<span>.</span></span
+          ><span>Qili Zhang</span></a
+        >
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" hidden>
+          Menu <span aria-hidden="true">＋</span>
+        </button>
+        <nav id="primary-navigation" class="primary-navigation" aria-label="Main navigation">
+          <a href="#about">About</a><a href="#research">Research</a><a href="#publications">Publications</a><a href="#education">Education</a
+          ><a href="#contact">Contact <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="container">
+      <section class="hero" id="about" aria-labelledby="name">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            Ph.D. researcher <span class="eyebrow-divider" aria-hidden="true">/</span> <span class="hero-location">Beijing, China</span>
+          </p>
+          <h1 id="name">Qili Zhang<span class="name-dot">.</span></h1>
+          <p class="hero-intro">
+            Third-year Ph.D. candidate at <a href="https://www.buaa.edu.cn/" target="_blank" rel="noopener noreferrer">Beihang University</a> and
+            Zhongguancun Laboratory.
+          </p>
+          <p class="hero-description">
+            I study data security for large language models, agents, and retrieval-augmented generation. My interests span verifiable reasoning,
+            modular RAG systems, and privacy-preserving learning.
+          </p>
+          <div class="hero-links">
+            <a
+              class="primary-link"
+              href="https://scholar.google.com/citations?user=MKR62vEAAAAJ&amp;hl=zh-CN"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Google Scholar <span aria-hidden="true">↗</span></a
+            >
+            <a href="https://github.com/xiaolizhang77" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+            <a href="mailto:zhangqili@buaa.edu.cn">Email <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <figure class="portrait">
+          <div class="portrait-frame">
+            <img
+              src="/homepage/portrait.jpg"
+              alt="Qili Zhang under flowering trees"
+              width="2767"
+              height="3689"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </div>
+          <figcaption><span class="caption-rule" aria-hidden="true"></span> Exploring reasoning &amp; retrieval</figcaption>
+        </figure>
+      </section>
+
+      <section class="section research-section" id="research" aria-labelledby="research-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 <span aria-hidden="true">/</span> Research</p>
+            <h2 id="research-title">Selected projects</h2>
+          </div>
+          <p class="section-note">From reasoning with proof<br />to understanding retrieval.</p>
+        </div>
+        <div class="project-grid">
+          <a class="project-card proof-project" href="/Proof-R1/" aria-label="Explore the Proof-R1 project website">
+            <div class="project-top">
+              <span class="project-category">Verifiable reasoning</span><span class="project-arrow" aria-hidden="true">↗</span>
+            </div>
+            <div class="project-main">
+              <div class="project-image"><img src="/Proof-R1/assets/logo-v4.png" alt="" width="116" height="116" loading="lazy" /></div>
+              <div>
+                <h3>Proof-R1</h3>
+                <p class="project-subtitle">Learning to prove,<br />not just to answer.</p>
+              </div>
+            </div>
+            <p class="project-description">Reinforcement learning from formal verification for natural-language logical reasoning.</p>
+            <span class="project-link">Explore the project <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="project-card xrag-project" href="/XRAG/" aria-label="Explore the XRAG project website">
+            <div class="project-top">
+              <span class="project-category">Retrieval-augmented generation</span><span class="project-arrow" aria-hidden="true">↗</span>
+            </div>
+            <div class="project-main">
+              <div class="project-image"><img src="/XRAG/assets/logo.png" alt="" width="116" height="108" loading="lazy" /></div>
+              <div>
+                <h3>XRAG</h3>
+                <p class="project-subtitle">Examining the core<br />of advanced RAG.</p>
+              </div>
+            </div>
+            <p class="project-description">A modular framework for benchmarking foundational components in advanced RAG systems.</p>
+            <span class="project-link">Explore the project <span aria-hidden="true">→</span></span>
+          </a>
+        </div>
+      </section>
+
+      <section class="section publications-section" id="publications" aria-labelledby="publications-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 <span aria-hidden="true">/</span> Publications</p>
+            <h2 id="publications-title">Papers &amp; preprints</h2>
+          </div>
+          <a class="text-link" href="https://scholar.google.com/citations?user=MKR62vEAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer"
+            >View on Google Scholar <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <div class="publication-toolbar">
+          <p class="publication-count" id="publication-count" aria-live="polite" aria-atomic="true">6 publications</p>
+          <div class="publication-filters" role="group" aria-label="Filter publications by type" hidden>
+            <button type="button" data-filter="all" aria-pressed="true" aria-controls="publication-list">All</button>
+            <button type="button" data-filter="conference" aria-pressed="false" aria-controls="publication-list">Conference</button>
+            <button type="button" data-filter="preprint" aria-pressed="false" aria-controls="publication-list">Preprint</button>
+          </div>
+        </div>
+        <div id="publication-list" class="publication-list">
+          <article class="publication" data-venue="conference" aria-labelledby="pub-zhang2026xrag">
+            <div class="pub-meta">
+              <span class="pub-venue">ICDE</span>
+              <span class="pub-year">2026</span>
+            </div>
+            <h3 id="pub-zhang2026xrag">
+              <a
+                href="https://ieeexplore.ieee.org/abstract/document/11629265/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="XRAG: eXamining the core-benchmarking foundational components in advanced retrieval-augmented generation — XRAG paper"
+                >XRAG: eXamining the core-benchmarking foundational components in advanced retrieval-augmented generation</a
+              >
+            </h3>
+            <p class="pub-authors">
+              <strong>Qili Zhang</strong>, Qianren Mao, Yangyifei Luo, Yashuo Luo, Hanwen Hao, Zhilong Cao, Weifeng Jiang, Zhijun Chen, Junnan Liu,
+              Feng Yan, Xiaolong Wang, Jinlong Zhang, Zhenting Huang, Zhixing Tan, Jie Sun, Bo Li, Jianxin Li, Philip S Yu
+            </p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/pdf/2412.15529" target="_blank" rel="noopener noreferrer" aria-label="Paper: XRAG (PDF)">Paper</a>
+              <a href="https://github.com/DocAILab/XRAG" target="_blank" rel="noopener noreferrer" aria-label="Code: XRAG">Code</a>
+              <a href="/XRAG/" aria-label="Website: XRAG">Website</a>
+              <details class="citation">
+                <summary aria-label="BibTeX citation: XRAG">BibTeX</summary>
+                <pre><code>@inproceedings{zhang2026xrag,
+  title = &#123;&#123;XRAG: eXamining the core-benchmarking foundational components in advanced retrieval-augmented generation}},
+  author = {Qili Zhang and Qianren Mao and Yangyifei Luo and Yashuo Luo and Hanwen Hao and Zhilong Cao and Weifeng Jiang and Zhijun Chen and Junnan Liu and Feng Yan and Xiaolong Wang and Jinlong Zhang and Zhenting Huang and Zhixing Tan and Jie Sun and Bo Li and Jianxin Li and Philip S Yu},
+  booktitle = {2026 IEEE 42nd International Conference on Data Engineering (ICDE)},
+  year = {2026},
+  pages = {2697--2710},
+  publisher = {IEEE},
+  eprint = {2412.15529},
+  archiveprefix = {arXiv},
+  primaryclass = {cs.CL},
+  url = {https://ieeexplore.ieee.org/abstract/document/11629265/},
+  pdf = {https://arxiv.org/pdf/2412.15529}
+}</code></pre>
+              </details>
+            </div>
+          </article>
+
+          <article class="publication" data-venue="conference" aria-labelledby="pub-jiang2026selective">
+            <div class="pub-meta">
+              <span class="pub-venue">EMNLP Findings</span>
+              <span class="pub-year">2026</span>
+            </div>
+            <h3 id="pub-jiang2026selective">
+              <a
+                href="https://aclanthology.org/2026.findings-emnlp.1970/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Selective Knowledge Edit Reversal via Gated Singular Vector Shrinkage — Selective Reversal paper"
+                >Selective Knowledge Edit Reversal via Gated Singular Vector Shrinkage</a
+              >
+            </h3>
+            <p class="pub-authors">Weifeng Jiang, Ruirui Chen, Qianren Mao, Junnan Liu, <strong>Qili Zhang</strong>, Kwok-Yan Lam</p>
+            <div class="pub-links">
+              <a
+                href="https://aclanthology.org/2026.findings-emnlp.1970.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Paper: Selective Reversal (PDF)"
+                >Paper</a
+              >
+              <details class="citation">
+                <summary aria-label="BibTeX citation: Selective Reversal">BibTeX</summary>
+                <pre><code>@inproceedings{jiang2026selective,
+  title = &#123;&#123;Selective Knowledge Edit Reversal via Gated Singular Vector Shrinkage}},
+  author = {Weifeng Jiang and Ruirui Chen and Qianren Mao and Junnan Liu and Qili Zhang and Kwok-Yan Lam},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2026},
+  year = {2026},
+  pages = {42007--42027},
+  publisher = {Association for Computational Linguistics},
+  doi = {10.18653/2026.findings-emnlp.1970},
+  url = {https://aclanthology.org/2026.findings-emnlp.1970/},
+  pdf = {https://aclanthology.org/2026.findings-emnlp.1970.pdf}
+}</code></pre>
+              </details>
+            </div>
+          </article>
+
+          <article class="publication" data-venue="preprint" aria-labelledby="pub-zhang2026learningprove">
+            <div class="pub-meta">
+              <span class="pub-venue">arXiv</span>
+              <span class="pub-year">2026</span>
+            </div>
+            <h3 id="pub-zhang2026learningprove">
+              <a
+                href="https://arxiv.org/abs/2609.37203"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Learning to Prove, Not Just to Answer: Reinforcement Learning from Formal Verification for Natural-Language Logical Reasoning — Proof-R1 paper"
+                >Learning to Prove, Not Just to Answer: Reinforcement Learning from Formal Verification for Natural-Language Logical Reasoning</a
+              >
+            </h3>
+            <p class="pub-authors">
+              <strong>Qili Zhang</strong>, Qianren Mao, Hanze Cai, Kaiming Zhao, Yuening He, Xihan Lei, Yashuo Luo, Hanwen Hao, Yutong Gu, Likang
+              Xiao, Zhijun Chen, Weifeng Jiang, Haoyi Zhou, Jianxin Li
+            </p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/pdf/2609.37203" target="_blank" rel="noopener noreferrer" aria-label="Paper: Proof-R1 (PDF)">Paper</a>
+              <a href="https://anonymous.4open.science/r/Proof-R1/" target="_blank" rel="noopener noreferrer" aria-label="Code: Proof-R1">Code</a>
+              <a href="/Proof-R1/" aria-label="Website: Proof-R1">Website</a>
+              <details class="citation">
+                <summary aria-label="BibTeX citation: Proof-R1">BibTeX</summary>
+                <pre><code>@misc{zhang2026learningprove,
+  title = &#123;&#123;Learning to Prove, Not Just to Answer: Reinforcement Learning from Formal Verification for Natural-Language Logical Reasoning}},
+  author = {Qili Zhang and Qianren Mao and Hanze Cai and Kaiming Zhao and Yuening He and Xihan Lei and Yashuo Luo and Hanwen Hao and Yutong Gu and Likang Xiao and Zhijun Chen and Weifeng Jiang and Haoyi Zhou and Jianxin Li},
+  year = {2026},
+  eprint = {2609.37203},
+  archiveprefix = {arXiv},
+  primaryclass = {cs.AI},
+  url = {https://arxiv.org/abs/2609.37203},
+  pdf = {https://arxiv.org/pdf/2609.37203}
+}</code></pre>
+              </details>
+            </div>
+          </article>
+
+          <article class="publication" data-venue="preprint" aria-labelledby="pub-luo2026solver">
+            <div class="pub-meta">
+              <span class="pub-venue">arXiv</span>
+              <span class="pub-year">2026</span>
+            </div>
+            <h3 id="pub-luo2026solver">
+              <a
+                href="https://arxiv.org/abs/2610.36445"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="From Solver Trajectories to Teaching Trajectories: Cognition-Aligned Reasoning Distillation — CARD paper"
+                >From Solver Trajectories to Teaching Trajectories: Cognition-Aligned Reasoning Distillation</a
+              >
+            </h3>
+            <p class="pub-authors">
+              Yashuo Luo, Qianren Mao, Ziqi Qin, Junnan Liu, Haitao Li, <strong>Qili Zhang</strong>, Yuan Gao, Zhijun Chen, Xu Wang
+            </p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/pdf/2610.36445" target="_blank" rel="noopener noreferrer" aria-label="Paper: CARD (PDF)">Paper</a>
+              <a href="https://github.com/LiteSSLHub/CARD" target="_blank" rel="noopener noreferrer" aria-label="Code: CARD">Code</a>
+              <details class="citation">
+                <summary aria-label="BibTeX citation: CARD">BibTeX</summary>
+                <pre><code>@misc{luo2026solver,
+  title = &#123;&#123;From Solver Trajectories to Teaching Trajectories: Cognition-Aligned Reasoning Distillation}},
+  author = {Yashuo Luo and Qianren Mao and Ziqi Qin and Junnan Liu and Haitao Li and Qili Zhang and Yuan Gao and Zhijun Chen and Xu Wang},
+  year = {2026},
+  eprint = {2610.36445},
+  archiveprefix = {arXiv},
+  primaryclass = {cs.AI},
+  url = {https://arxiv.org/abs/2610.36445},
+  pdf = {https://arxiv.org/pdf/2610.36445}
+}</code></pre>
+              </details>
+            </div>
+          </article>
+
+          <article class="publication" data-venue="preprint" aria-labelledby="pub-mao2026nanonet">
+            <div class="pub-meta">
+              <span class="pub-venue">arXiv</span>
+              <span class="pub-year">2026</span>
+            </div>
+            <h3 id="pub-mao2026nanonet">
+              <a
+                href="https://arxiv.org/abs/2602.06093"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="NanoNet: Parameter-Efficient Learning with Label-Scarce Supervision for Lightweight Text Mining Model — NanoNet paper"
+                >NanoNet: Parameter-Efficient Learning with Label-Scarce Supervision for Lightweight Text Mining Model</a
+              >
+            </h3>
+            <p class="pub-authors">
+              Qianren Mao, Yashuo Luo, Ziqi Qin, Junnan Liu, Weifeng Jiang, Zhijun Chen, Zhuoran Li, Likang Xiao, Chuou Xu,
+              <strong>Qili Zhang</strong>, Hanwen Hao, Jingzheng Li, Chunghua Lin, Jianxin Li, Philip S Yu
+            </p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/pdf/2602.06093" target="_blank" rel="noopener noreferrer" aria-label="Paper: NanoNet (PDF)">Paper</a>
+              <details class="citation">
+                <summary aria-label="BibTeX citation: NanoNet">BibTeX</summary>
+                <pre><code>@misc{mao2026nanonet,
+  title = &#123;&#123;NanoNet: Parameter-Efficient Learning with Label-Scarce Supervision for Lightweight Text Mining Model}},
+  author = {Qianren Mao and Yashuo Luo and Ziqi Qin and Junnan Liu and Weifeng Jiang and Zhijun Chen and Zhuoran Li and Likang Xiao and Chuou Xu and Qili Zhang and Hanwen Hao and Jingzheng Li and Chunghua Lin and Jianxin Li and Philip S Yu},
+  year = {2026},
+  eprint = {2602.06093},
+  archiveprefix = {arXiv},
+  primaryclass = {cs.LG},
+  url = {https://arxiv.org/abs/2602.06093},
+  pdf = {https://arxiv.org/pdf/2602.06093}
+}</code></pre>
+              </details>
+            </div>
+          </article>
+
+          <article class="publication" data-venue="preprint" aria-labelledby="pub-mao2025privacy">
+            <div class="pub-meta">
+              <span class="pub-venue">arXiv</span>
+              <span class="pub-year">2025</span>
+            </div>
+            <h3 id="pub-mao2025privacy">
+              <a
+                href="https://arxiv.org/abs/2504.19101"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Privacy-preserving federated embedding learning for localized retrieval-augmented generation — Federated RAG paper"
+                >Privacy-preserving federated embedding learning for localized retrieval-augmented generation</a
+              >
+            </h3>
+            <p class="pub-authors">
+              Qianren Mao, <strong>Qili Zhang</strong>, Hanwen Hao, Zhentao Han, Runhua Xu, Weifeng Jiang, Qi Hu, Zhijun Chen, Tyler Zhou, Bo Li,
+              Yangqiu Song, Jin Dong, Jianxin Li, Philip S Yu
+            </p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/pdf/2504.19101" target="_blank" rel="noopener noreferrer" aria-label="Paper: Federated RAG (PDF)">Paper</a>
+              <details class="citation">
+                <summary aria-label="BibTeX citation: Federated RAG">BibTeX</summary>
+                <pre><code>@misc{mao2025privacy,
+  title = &#123;&#123;Privacy-preserving federated embedding learning for localized retrieval-augmented generation}},
+  author = {Qianren Mao and Qili Zhang and Hanwen Hao and Zhentao Han and Runhua Xu and Weifeng Jiang and Qi Hu and Zhijun Chen and Tyler Zhou and Bo Li and Yangqiu Song and Jin Dong and Jianxin Li and Philip S Yu},
+  year = {2025},
+  eprint = {2504.19101},
+  archiveprefix = {arXiv},
+  primaryclass = {cs.CL},
+  url = {https://arxiv.org/abs/2504.19101},
+  pdf = {https://arxiv.org/pdf/2504.19101}
+}</code></pre>
+              </details>
+            </div>
+          </article>
+        </div>
+        <p class="sr-only" id="copy-status" role="status"></p>
+      </section>
+
+      <section class="section education-section" id="education" aria-labelledby="education-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">03 <span aria-hidden="true">/</span> Background</p>
+            <h2 id="education-title">Education</h2>
+          </div>
+        </div>
+        <div class="education-list">
+          <article class="education-item">
+            <p class="education-date">2024 — Present</p>
+            <div>
+              <h3>Ph.D. in Computer Science</h3>
+              <p class="institution">Beihang University &amp; Zhongguancun Laboratory</p>
+              <p class="education-detail">National Superior College for Engineers · Direct Ph.D. program</p>
+            </div>
+            <span class="degree-mark" aria-hidden="true">Ph.D.</span>
+          </article>
+          <article class="education-item">
+            <p class="education-date">2020 — 2024</p>
+            <div>
+              <h3>B.S. in Computer Science and Engineering</h3>
+              <p class="institution">Beihang University</p>
+              <p class="education-detail">School of Computer Science and Engineering</p>
+            </div>
+            <span class="degree-mark" aria-hidden="true">B.S.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contact" aria-labelledby="contact-title">
+        <div>
+          <h2 class="eyebrow" id="contact-title">Get in touch</h2>
+          <a class="email-link" href="mailto:zhangqili@buaa.edu.cn">zhangqili@buaa.edu.cn <span aria-hidden="true">↗</span></a>
+          <p class="contact-location">Beihang University · Beijing, China</p>
+        </div>
+        <div class="contact-links">
+          <a href="https://scholar.google.com/citations?user=MKR62vEAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer"
+            >Google Scholar <span aria-hidden="true">↗</span></a
+          ><a href="https://github.com/xiaolizhang77" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
     </main>
+    <footer class="site-footer container">
+      <p>© 2026 Qili Zhang</p>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </footer>
   </body>
 </html>

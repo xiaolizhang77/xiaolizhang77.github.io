@@ -21,8 +21,12 @@ function collect(path, base) {
 
 const published = new Set(collect(directory, directory));
 const rootFiles = ["index.html", "404.html", "robots.txt", "sitemap.xml", ".nojekyll"];
+const homepageFiles = collect(resolve(root, "homepage"), root);
+for (const file of ["homepage/style.css", "homepage/script.js", "homepage/portrait.jpg", "homepage/favicon.svg"]) {
+  if (!homepageFiles.includes(file)) throw new Error(`Missing required homepage source asset: ${file}`);
+}
 const paperFiles = ["Proof-R1", "XRAG"].flatMap((project) => collect(resolve(root, project), root));
-const expected = new Set([...rootFiles, ...paperFiles]);
+const expected = new Set([...rootFiles, ...homepageFiles, ...paperFiles]);
 for (const file of expected) {
   if (!published.has(file)) throw new Error(`Missing published page or asset: ${file}`);
   if (!readFileSync(resolve(root, file)).equals(readFileSync(resolve(directory, file)))) {
@@ -89,4 +93,6 @@ for (const path of ["/", "/Proof-R1/", "/Proof-R1/blog.html", "/XRAG/", "/XRAG/b
     throw new Error(`Missing canonical page in sitemap: ${path}`);
   }
 }
-console.log(`Validated ${pageIds.size} HTML pages and ${paperFiles.length} unchanged paper-site files; no retired template files were published.`);
+console.log(
+  `Validated ${pageIds.size} HTML pages, ${homepageFiles.length} homepage assets, and ${paperFiles.length} unchanged paper-site files; no profile source or retired template files were published.`
+);

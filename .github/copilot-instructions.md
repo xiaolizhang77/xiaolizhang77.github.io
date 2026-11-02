@@ -1,17 +1,18 @@
 # Static site development instructions
 
-This repository hosts two standalone paper websites and a minimal root page.
-The previous al-folio personal homepage has been removed. A new personal homepage
-will be designed separately.
+This repository contains a new static personal homepage and two standalone paper
+websites. The previous al-folio personal homepage and its build system have been removed.
 
 ## Structure
 
 - `Proof-R1/`: Proof-R1 website, article, and assets.
 - `XRAG/`: XRAG website, article, and assets.
-- Root static pages and metadata: the root entry point, error page, robots, and sitemap.
+- `index.html`: personal homepage, including six static publication entries.
+- `homepage/`: homepage CSS, JavaScript, portrait, and favicon.
+- Root static pages and metadata: the error page, robots, and sitemap.
 - `scripts/build-site.mjs`: the allowlist-based Node.js builder.
 - `scripts/validate-built-site.mjs`: the published-file and link validator.
-- `content/profile/`: personal-profile material retained for the future homepage; never published.
+- `content/profile/`: saved personal-profile source material; never included in Pages output.
 - `_site/`: generated deployment output; never commit this directory.
 
 Read `README.md` for the current source layout and preview commands. Follow
@@ -39,6 +40,10 @@ There is no Jekyll, Liquid, Ruby, Python, Docker, Sass, or PurgeCSS build step.
 - Preserve `/Proof-R1/` and `/XRAG/`, including their relative asset URLs.
 - Keep paper-site files unchanged during the build. Edit their source files only
   when a requested content or design change requires it.
+- Keep the six static publication entries in `index.html` synchronized with
+  `content/profile/publications.bib`; no BibTeX-to-HTML generation step exists.
+- Place homepage assets in `homepage/`. Reference existing paper images and logos
+  without changing their files.
 - Keep biography drafts, private materials, and old personal-site backups out of
   the build output.
 - Format changed files with the repository's installed Prettier.
