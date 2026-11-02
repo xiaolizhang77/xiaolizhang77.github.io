@@ -1,49 +1,127 @@
-name: Deploy paper site
+name: Deploy site
 
 on:
   push:
     branches: [master, main]
     paths:
-      - "index.html"
-      - "404.html"
-      - "robots.txt"
-      - "sitemap.xml"
+      - "assets/**"
+      - "_sass/**"
+      - "_scripts/**"
+      - "_plugins/**"
+      - "**.bib"
+      - "**.html"
+      - "**.js"
+      - "**.liquid"
+      - "**/*.md"
+      - "**.yml"
       - "Proof-R1/**"
       - "XRAG/**"
-      - "scripts/build-paper-site.mjs"
-      - ".github/workflows/deploy.yml"
+      - "scripts/**"
+      - "robots.txt"
+      - "Gemfile"
+      - "Gemfile.lock"
+      - "package.json"
+      - "package-lock.json"
+      - "!.github/workflows/axe.yml"
+      - "!.github/workflows/broken-links.yml"
+      - "!.github/workflows/broken-links-site.yml"
+      - "!.github/workflows/deploy-docker-tag.yml"
+      - "!.github/workflows/deploy-image.yml"
+      - "!.github/workflows/docker-slim.yml"
+      - "!.github/workflows/lighthouse-badger.yml"
+      - "!.github/workflows/prettier.yml"
+      - "!lighthouse_results/**"
+      - "!CONTRIBUTING.md"
+      - "!CUSTOMIZE.md"
+      - "!FAQ.md"
+      - "!INSTALL.md"
+      - "!README.md"
   pull_request:
     branches: [master, main]
     paths:
-      - "index.html"
-      - "404.html"
-      - "robots.txt"
-      - "sitemap.xml"
+      - "assets/**"
+      - "_sass/**"
+      - "_scripts/**"
+      - "_plugins/**"
+      - "**.bib"
+      - "**.html"
+      - "**.js"
+      - "**.liquid"
+      - "**/*.md"
+      - "**.yml"
       - "Proof-R1/**"
       - "XRAG/**"
-      - "scripts/build-paper-site.mjs"
-      - ".github/workflows/deploy.yml"
+      - "scripts/**"
+      - "robots.txt"
+      - "Gemfile"
+      - "Gemfile.lock"
+      - "package.json"
+      - "package-lock.json"
+      - "!.github/workflows/axe.yml"
+      - "!.github/workflows/broken-links.yml"
+      - "!.github/workflows/broken-links-site.yml"
+      - "!.github/workflows/deploy-docker-tag.yml"
+      - "!.github/workflows/deploy-image.yml"
+      - "!.github/workflows/docker-slim.yml"
+      - "!.github/workflows/lighthouse-badger.yml"
+      - "!.github/workflows/prettier.yml"
+      - "!lighthouse_results/**"
+      - "!CONTRIBUTING.md"
+      - "!CUSTOMIZE.md"
+      - "!FAQ.md"
+      - "!INSTALL.md"
+      - "!README.md"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: paper-site-${{ github.ref }}
+  group: site-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      JEKYLL_ENV: production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3.5"
+          bundler-cache: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Validate and build the paper site
-        run: node scripts/build-paper-site.mjs
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+          python -m pip install --upgrade nbconvert
+      - name: Build the personal site and paper pages
+        run: |
+          bundle exec jekyll build
+          touch _site/.nojekyll
+      - name: Purge unused personal-site CSS
+        run: npx --yes purgecss --config purgecss.config.js
+      - name: Validate the complete site
+        run: node scripts/validate-built-site.mjs
+      - name: Save the validated build
+        uses: actions/upload-artifact@v4
+        with:
+          name: validated-site
+          path: _site/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
       - name: Deploy to GitHub Pages
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4

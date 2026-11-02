@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       url:
-        description: "Page path to check (Proof-R1/, XRAG/, or either project's blog.html; use / for the project index)"
-        default: "Proof-R1/"
+        description: "Published page path to check (/, publications/, Proof-R1/, XRAG/, or either paper's blog.html)"
+        default: "/"
         required: false
         type: string
 
@@ -16,14 +16,16 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout the published site
         uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: _site
+          persist-credentials: false
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Build the paper site
-        run: node scripts/build-paper-site.mjs
       - name: Get Chromium version
         run: |
           CHROMIUM_VERSION=$(curl --fail --silent https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_STABLE | cut -d. -f1)
@@ -36,9 +38,9 @@ jobs:
         run: npm install -g "chromedriver@$CHROMIUM_VERSION" @axe-core/cli http-server
       - name: Check accessibility
         env:
-          CHECK_PATH: ${{ inputs.url || 'Proof-R1/' }}
+          CHECK_PATH: ${{ inputs.url || '/' }}
         run: |
-          http-server _site/ -a 127.0.0.1 -p 8080 > /tmp/proof-r1-http.log 2>&1 &
+          http-server _site/ -a 127.0.0.1 -p 8080 > /tmp/site-http.log 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid"' EXIT
           for attempt in {1..20}; do

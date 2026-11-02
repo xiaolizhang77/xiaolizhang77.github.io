@@ -2,11 +2,12 @@ name: Check for broken links on site
 
 on:
   workflow_run:
-    workflows: [Deploy paper site]
+    workflows: [Deploy site]
     types: [completed]
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
 
 jobs:
@@ -16,13 +17,29 @@ jobs:
       (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event != 'pull_request')
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the deployed source
+      - name: Checkout the matching source
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          persist-credentials: false
+      - name: Download the exact deployed build
+        if: github.event_name == 'workflow_run'
+        uses: actions/download-artifact@v4
+        with:
+          name: validated-site
+          path: .codex-preview/deployed-site
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+      - name: Checkout the published site for a manual check
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: .codex-preview/deployed-site
+          persist-credentials: false
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Check published local links and build
-        run: node scripts/build-paper-site.mjs
+      - name: Validate the personal site, paper pages, and local links
+        run: node scripts/validate-built-site.mjs --directory .codex-preview/deployed-site
