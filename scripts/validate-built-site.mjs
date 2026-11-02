@@ -22,7 +22,7 @@ function collect(path, base) {
 const published = new Set(collect(directory, directory));
 const rootFiles = ["index.html", "404.html", "robots.txt", "sitemap.xml", ".nojekyll"];
 const homepageFiles = collect(resolve(root, "homepage"), root);
-for (const file of ["homepage/style.css", "homepage/script.js", "homepage/portrait.jpg", "homepage/avatar-icon.png"]) {
+for (const file of ["homepage/style.css", "homepage/script.js", "homepage/portrait.jpg", "homepage/avatar-icon.png", "homepage/favicon.png"]) {
   if (!homepageFiles.includes(file)) throw new Error(`Missing required homepage source asset: ${file}`);
 }
 const paperFiles = ["Proof-R1", "XRAG"].flatMap((project) => collect(resolve(root, project), root));
