@@ -121,15 +121,12 @@ h3 {
   letter-spacing: -0.4px;
   flex-shrink: 0;
 }
-.monogram {
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: -2px;
-  border-right: 1px solid #d9dbe5;
-  padding-right: 17px;
-}
-.monogram > span {
-  color: var(--accent);
+.personal-logo {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  border-radius: 25%;
+  object-fit: cover;
 }
 .primary-navigation {
   display: flex;
@@ -735,9 +732,9 @@ h2 {
   .wordmark {
     font-size: 16px;
   }
-  .monogram {
-    font-size: 24px;
-    padding-right: 14px;
+  .personal-logo {
+    width: 32px;
+    height: 32px;
   }
   .menu-toggle {
     display: inline-flex;
